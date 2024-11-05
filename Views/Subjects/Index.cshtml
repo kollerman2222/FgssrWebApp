@@ -1,0 +1,97 @@
+﻿@model IEnumerable<SubjectsViewModel>
+
+
+
+@{
+    ViewData["Title"] = "Subjects";
+    Layout = "_DashboardLayout";
+}
+
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>جميع المقررات الدراسيه</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>كود المقرر</th>
+                                    <th>أسم المقرر عربي</th>
+                                    <th>أسم المقرر أنجليزي</th>
+                                    <th>البرنامج الدراسي</th>
+                                    <th>الدرجه العلميه</th>
+                                    <th>تعديل المقرر</th>
+                                    <th>حذف المقرر</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.SubjectCode</td>
+                                        <td>@item.SubjectNameArabic</td>
+                                        <td>@item.SubjectNameEnglish</td>
+                                        <td>@item.Sections?.SectionName</td>
+                                        <td>@item.ScientificDegree</td>
+                                        <td><a asp-action="Edit" asp-controller="Subjects" asp-route-id="@item.SubjectId" class="ad-st-view-edit">تعديل</a></td>
+
+                                        <td><a asp-action="Delete" asp-controller="Subjects" asp-route-id="@item.SubjectId" class="ad-st-view-delete DeleteSubmitbutton">حذف</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+
+            $('.DeleteSubmitbutton').on('click', function (event) {
+                event.preventDefault();
+                var deleteUrl = $(this).attr('href');
+                Swal.fire({
+                    title: "هل تريد القيام بالحذف ؟",
+                    icon: "warning",
+                    iconHtml: "!",
+                    confirmButtonText: "نعم",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "لا",
+                    showCancelButton: true,
+                    showCloseButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: deleteUrl,
+                            type: 'GET',
+                            success: function (response) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: response.deleteMessage,
+                                    showConfirmButton: false,
+                                    timer: 1700
+                                }).then(() => {
+                                    window.location.href = '/Subjects/Index?subjectSearch=' + response.subjectSearch;
+                                });
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('Error occurred:', error);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

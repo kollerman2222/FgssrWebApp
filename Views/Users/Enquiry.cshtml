@@ -1,0 +1,168 @@
+﻿@model AdmissionViewModel
+
+@{
+    Layout = "_DashboardLayout";
+}
+
+
+<style>
+    .declinereason{
+        display:none;
+    }
+
+
+
+
+    .zoom {
+        cursor: zoom-in;
+    }
+
+    .zoom.zoomout {
+        position:relative;
+        transform: scale(4.5);
+        z-index: 1000;
+        cursor: zoom-out;
+     }
+
+</style>
+
+<section>
+    <div class="pro-cover">
+    </div>
+    <div class="pro-menu">
+        <div class="container">
+            <div class="col-md-9 col-md-offset-3">
+               
+            </div>
+        </div>
+    </div>
+    <div class="stu-db">
+        <div class="container pg-inn">
+            <form method="post" asp-action="Enquiry">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input hidden asp-for="userId" />
+                <input hidden asp-for="GraduationCertUpload" />
+                <input hidden asp-for="sectionId" />
+                <div class="col-md-9">
+                    <div class="udb">
+                        <div class="udb-sec udb-prof">
+                            <h4><img src="images/icon/db1.png" alt="" asp-append-version="true" /> تعديل حاله الطلب</h4>
+
+                            <div class="sdb-tabl-com sdb-pro-table">
+
+                                <table class="responsive-table bordered">
+                                    <tbody>
+
+                                        <tr>
+                                            <td>رقم الطلب</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" readonly asp-for="@Model.AdmissionNumber" /></td>
+                                        </tr>
+
+                                        
+                                        <tr>
+                                            <td>الاسم بالانجليزي</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" readonly asp-for="@Model.FullNameEnglish" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td> الاسم بالعربي </td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" readonly asp-for="@Model.FullNameArabic" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>الايميل</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" readonly asp-for="@Model.Email" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>الموبيل</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" readonly asp-for="@Model.PhoneNumber" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>تاريخ الميلاد</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" readonly asp-for="@Model.BirthDate" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>العنوان</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" readonly asp-for="@Model.Address" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>الدبلومه</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" readonly asp-for="@Model.sectionName" /></td>
+                                        </tr>
+                                            <tr>
+                                                <td>شهاده التخرج</td>
+                                                <td>:</td>
+                                            <td><img class="zoom"  src="~/uploads/gradcerts/@Model.NationalId/@Model.GraduationCertUpload" width="200" height="200" asp-append-version="true" /></td>
+                                            <td><a class="downloadbtn" href="~/uploads/gradcerts/@Model.NationalId/@Model.GraduationCertUpload" download>تحميل الشهاده</a></td>
+                                            </tr>
+                                            <tr>
+                                            <td>حاله الطلب</td>
+                                            <td>:</td>
+                                               <td>
+                                                <div class="input-field col s12">
+                                                    <select class="browser-default" id="selectprivate" asp-for="ApplicationStatus">
+                                                        <option value="" disabled selected>حاله طلب التفديم</option>
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Approved">Approved</option>
+                                                        <option value="Declined">Declined</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            </tr>
+
+                                        <tr id="showrow" class="declinereason">
+
+                                                <td> سبب رفض الطلب </td>
+                                                <td>:</td>
+                                                <td><input  type="text"   class="inputtext" asp-for="DeclineReason" />
+                                                <span asp-validation-for="DeclineReason" class="validationcolor"></span></td>
+                                            </tr>
+
+                                    </tbody>
+                                </table>
+                                <div class="sdb-bot-edit">
+                                    <button type="submit" class="waves-effect waves-light btn-large sdb-btn ml-5"><i class="fa fa-pencil"></i> حفظ التعديلات</button>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+            $('#selectprivate').change(function () {
+                if ($(this).val() === 'Declined') 
+                {
+                    $('#showrow').removeClass('declinereason');
+                } 
+                else 
+                {
+                    $('#showrow').addClass('declinereason');
+                }
+            });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $(".zoom").click(function () {
+                $(this).toggleClass("zoomout");
+            });
+        });
+    </script>
+
+}

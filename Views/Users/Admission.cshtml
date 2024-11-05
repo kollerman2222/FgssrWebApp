@@ -1,0 +1,143 @@
+﻿@model AdmissionViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<style>
+    .move {
+        /* padding-right: 90px; */
+        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-right:35%;
+    }
+
+    .admiss-form{
+        direction:rtl;
+    }
+</style>
+@if (Model.ApplicationStatus != null)
+{
+    <section>
+        <div class="container com-sp pad-bot-70 justify-content-center move"> @* old removed d-flex class *@
+            <div class="row">
+                <div class="con-title">
+                    <h2 class="bigtext">لديك طلب تقديم قيد التنفيذ </h2>
+                    <p>برجاء متابعه طلبك في صفحه حاله الطلب</p>
+                    <a class="btn btn-primary" href="/account/diplomastatus">متابعه حاله الطلب</a>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else{
+<section class="c-all h-quote">
+    <div class="container">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="all-title quote-title qu-new">
+                <h2>تقديم طلب الإلتحاق</h2>
+                <p>
+                    بعد أن تقوم بتقديم طلب القبول، ستكون حالة طلبك معلقة وسيتعين عليك انتظار موافقة المشرف على طلبك
+                    بمجرد الموافقة، يمكنك بعد ذلك تقديم أوراقك الرسمية في الكليه
+                </p>
+                <p>لا يمكنك التقدم إلا للحصول على دبلومة واحدة نشطة المرة الواحده ، وتأكد من مراجعة نموذج الطلب الخاص بك قبل التقديم</p>
+                <p class="help-line">شؤون الطلبه <span>02 33358496</span> </p> <span class="help-arrow pulse"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="n-form-com admiss-form">
+                <div class="col s12">
+                    <form asp-action="Admission" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input hidden asp-for="userId" />
+                        <input hidden asp-for="sectionId" />
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">الاسم:</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="FullNameArabic" class="form-control"  readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">الموبيل:</label>
+                            <div class="col-sm-9">
+                                <input type="number" asp-for="PhoneNumber" class="form-control" readonly>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">الرقم القومي:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" asp-for="NationalId" class="form-control" readonly>
+                                </div>
+                            </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">تاريخ الميلاد:</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="BirthDate" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">الايميل:</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="Email" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">الدبلومه المختاره</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="sectionName" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">شهاده التخرج</label>
+                            <div class="col-sm-9">
+                                <div class="file-field input-field">
+                                    <div class="btn">
+                                        <span>رفع الشهاده</span>
+                                        <input type="file" asp-for="GraduationCert" data-rule-extension="jpg,png,jpeg,pdf" data-msg-extension="Only JPG , PNG , JPEG , PDF are allowed" data-rule-filesize="1048576" data-msg-filesize="Max file size is 1 MB">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                        <span asp-validation-for="GraduationCert" class="validationcolor"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                        <div class="form-group mar-bot-0">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                @if (SignInManager.IsSignedIn(User) @*&& Model.isEmailConfirmed == true*@ )  @* Model.isPhoneConfirmed == true *@
+                                {
+                                    <i class="waves-effect waves-light light-btn waves-input-wrapper" style=""><input type="submit" value="تقديم الطلب" class="waves-button-input"></i>
+
+                                }
+                                else if (!SignInManager.IsSignedIn(User) @*|| !Model.isEmailConfirmed == true *@)@* || !Model.isPhoneConfirmed == true) *@
+                                {
+@*                                     <i class="waves-effect waves-light light-btn waves-input-wrapper" style=""><input type="submit" disabled value="APPLY NOW" class="waves-button-input"></i>
+ *@
+                                    <p class="validationcolor"> @Html.Raw(SignInManager.IsSignedIn(User) ? "" : "- يجب عليك تسجيل الدخول للتقديم")</p>
+                                    @* <p class="validationcolor"> @Html.Raw(Model.isEmailConfirmed == false ? "- يجب عليك تفعيل الايميل" : "")</p> *@
+@*                                     <p class="validationcolor"> @Html.Raw(Model.isPhoneConfirmed == false ? "- يجب عليك تفعيل رقم الموبيل" : "")</p>
+ *@                                     
+                                }
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+}
+<!--SECTION END-->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script>
+            $.validator.addMethod('filesize', function (value, element, params) {
+
+                return this.optional(element) || element.files[0].size <= params;
+            });
+        </script>
+    }
+}

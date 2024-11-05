@@ -1,0 +1,82 @@
+﻿@model DiplomasSectionsViewModel
+
+<style>
+    .deptextsize{
+        font-size:21px;
+    }
+</style>
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            @{
+                var departmentUrlParam = Context.Request.Query["departmentname"];
+                var diplomaUrlParam = Context.Request.Query["query"];
+            }    
+
+
+            
+                @foreach (var item in Model.secs)
+                {
+                    <div class="col-lg-4 col-sm-6 mb-5">
+                        <div class="card p-0 border-primary rounded-0 hover-shadow">
+                            <img class="card-img-top rounded-0" src="~/uploads/sections/@item.SectionImage" alt="No Image" width="348" height="289" asp-append-version="true" >
+                            <div class="card-body">
+                                <ul class="list-inline mb-2">
+                                    <li class="list-inline-item deptextsize">@item.Department?.DepartmentName </li>
+                                    <li class="list-inline-item">
+                                        @Html.Raw(item.isActive ? "<span class='text-success'>Avaliable</span>" : "<span class='text-danger'>Not Avaliable</span>")
+                                    </li>
+                                </ul>
+
+                                <h4 class="card-title">@item.SectionName</h4>
+
+                                <p class="card-text mb-4">
+                                @if(item.Description?.Length < 117)
+                                {
+                                    @item.Description
+                                }
+                                else
+                                {
+                                   @item.Description?.Substring(0, 117)<span>...</span>
+                                }
+                                </p>
+                                <a asp-controller="Home" asp-action="diplomadetails" asp-route-id="@item.SectionId" class="btn btn-primary btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+           
+        </div>
+    </div>
+    <div class="pg-pagina">
+        @if (Model.TotalPages > 1)
+        {
+            <ul class="pagination">
+                @if (Model.Page > 1)
+                {
+                    <li class="waves-effect"><a asp-action="Diplomas" asp-controller="Home" asp-route-departmentSearch="@Model.departmentSearch" asp-route-pageNumber="@(Model.Page - 1)"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                }
+                else
+                {
+                    <li class="waves-effect disabled "><a><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+
+                }
+
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="waves-effect @(i == Model.Page ? "active" : "")"><a asp-action="Diplomas" asp-controller="Home" asp-route-departmentSearch="@Model.departmentSearch" asp-route-pageNumber="@i">@i</a></li>
+                }
+                @if (Model.Page < Model.TotalPages)
+                {
+                    <li class="waves-effect"><a asp-action="Diplomas" asp-controller="Home" asp-route-departmentSearch="@Model.departmentSearch" asp-route-pageNumber="@(Model.Page + 1)"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                }
+                else
+                {
+                    <li class="waves-effect disabled"><a><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+
+                }
+            </ul>
+        }
+    </div>
+</section>

@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <style>
+        .row {
+            direction: rtl;
+        }
+
+        .textsizespan{
+            font-size:18px !important;
+        }
+
+      /*   .swalpopSize {
+            width: 100px;
+            height: 100px;
+        } */
+
+    </style>
+
+    <title>كليه الدراسات العليا للبحوث الاحصائية</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="words about college">
+    <meta name="keyword" content="college, university, fgssr, faculty of gradutate, faculty of graduate studies, faculty of graduate studies for statistical research, diploma, professional, academy, academic, professional diploma, academic diploma">
+    <link rel="shortcut icon" href="~/fgssricon.webp" type="image/x-icon">
+
+
+
+    <link rel="stylesheet" href="~/template/cssRTL/font-awesomeRTL.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/materializeRTL.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/bootstrapRTL.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/bootstrappluginRTL.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/styleRTL.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/style1RTL.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/themifyicons/themify-icons.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/template/cssRTL/style-mobRTL.css" asp-append-version="true">
+    <link href="~/template/cssrtl/sweetalert2.css" rel="stylesheet" asp-append-version="true" />
+
+</head>
+
+<body>
+    <div class="container-fluid sb1">
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-6 sb1-1">
+                <a href="#" class="btn-close-menu"><i class="fa fa-times" aria-hidden="true"></i></a>
+                <a href="#" class="atab-menu"><i class="fa fa-bars tab-menu" aria-hidden="true"></i></a>
+                <a href="index-2.html" class="logo"></a>
+                </div>
+            <div class="col-md-2 col-sm-3 col-xs-6">
+                <a class='waves-effect dropdown-button top-user-pro' href="/account/profile" data-activates='top-menu'>My Account</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid sb2">
+        <div class="row">
+            <div class="sb2-1">
+                <div class="sb2-12">
+                    <ul>
+                        <li>
+                            <img src="~/images/chaticon.webp" alt="" asp-append-version="true" > @* images must be 300 x 300*@
+                        </li>
+                        <li>
+                            <h5>@User.Identity?.Name</h5>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="sb2-13">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <a asp-action="Homepage" asp-controller="Home" class="menu-active "><i class="fa fa-bar-chart" aria-hidden="true"></i> الرئيسية</a>
+                        </li>
+                        <li>
+                            <a asp-action="Dashboard" asp-controller="Home" class="menu-active "><i class="fa fa-bar-chart" aria-hidden="true"></i> لوحه التكم</a>
+                        </li>
+                        <li>
+                            <a asp-action="RemoteMessages" asp-controller="Home" class="menu-active "><i class="fa fa-bar-chart" aria-hidden="true"></i> إشعارات للجميع</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-building" aria-hidden="true"></i> البرامج</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Departments">جميع البرامج</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Create" asp-controller="Departments">إضافه برنامج جديد</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-book" aria-hidden="true"></i>البرامج الدراسية</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Sections" asp-route-departmentSearch="برامج مهنيه">برامج مهنية</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Sections" asp-route-departmentSearch="برامج اكاديميه">برامج اكاديمية</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Sections" asp-route-departmentSearch="علوم بيانات">علوم بيانات</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Create" asp-controller="Sections">إضافه برنامج دراسي جديد</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-book" aria-hidden="true"></i>المقررات الدراسية</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Subjects" asp-route-subjectSearch="برامج مهنيه">مقررات البرامج المهنية</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Subjects" asp-route-subjectSearch="برامج اكاديميه">مقررات البرامج الاكاديمية</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Subjects" asp-route-subjectSearch="علوم بيانات">مقررات علوم البيانات</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Create" asp-controller="Subjects">إضافه مقرر دراسي جديد</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-calendar" aria-hidden="true"></i>المؤتمرات</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Events" asp-action="Index">جميع المؤتمرات</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Create" asp-controller="Events">إضافه مؤتمر جديد</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-newspaper-o" aria-hidden="true"></i> الأخبار</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a asp-action="Index" asp-controller="News">جميع الأخبار</a></li>
+                                    <li><a asp-action="Create" asp-controller="News">إضافه خبر جديد</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-users" aria-hidden="true"></i> أعضاء التدريس</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Staffs">جميع أعضاء التدريس</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Create" asp-controller="Staffs">إضافه عضو تدريس جديد</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-user" aria-hidden="true"></i> المستخدمين</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li>
+                                        <a asp-action="Index" asp-controller="Users">جميع المستخدمين</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-commenting-o" aria-hidden="true"></i> طلبات القبول</a>
+                            <div class="collapsible-body left-sub-menu">
+                                <ul>
+                                    <li><a asp-action="GetAllEnquiry" asp-controller="Users"> جميع طلبات القبول </a></li>
+                                    <li><a asp-action="GetPendingEnquiry" asp-controller="Users"> الطلبات المعلقة </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a asp-action="GetAllUsersFolders" asp-controller="Home"><i class="fa fa-folder"></i> إداره الملفات</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sb2-2">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script src="~/template/js/alert.js" asp-append-version="true"></script>
+    <script src="~/template/js/main.min.js" asp-append-version="true"></script>
+    <script src="~/template/js/bootstrap.min.js" asp-append-version="true"></script>
+@*     <script src="~/template/js/materialize.min.js" asp-append-version="true"></script>
+ *@  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+     <script src="~/template/js/custom.js" asp-append-version="true"></script>
+    <script src="~/template/js/sweetalert2.min.js" asp-append-version="true"></script>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "@TempData["SuccessMessage"]",
+                    showConfirmButton: false,
+                    timer: 1700
+                });
+            });
+        </script>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "@TempData["ErrorMessage"]",
+                    showConfirmButton: true
+                });
+            });
+        </script>
+    }
+
+
+    <script>
+        $(document).ready(function () {
+            $('.CreateSubmitButton').on('click', function (event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "هل تريد حفظ التعديلات ؟",
+                    icon: "warning",
+                    iconHtml: "!",
+                    confirmButtonText: "نعم",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonText: " لا ",
+                    cancelButtonColor: "#d33",
+                    showCancelButton: true,
+                    showCloseButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('.form').submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('.EditSubmitbutton').on('click', function (event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "هل تريد حفظ التعديلات ؟",
+                    icon: "warning",
+                    iconHtml: "!",
+                    confirmButtonText: "نعم",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonText: " لا ",
+                    cancelButtonColor: "#d33",
+                    showCancelButton: true,
+                    showCloseButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('.form').submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+
+</html>

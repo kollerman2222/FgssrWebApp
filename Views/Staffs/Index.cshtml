@@ -1,0 +1,61 @@
+﻿@model IEnumerable<StaffViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_DashboardLayout";
+
+}
+
+  <div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>جميع اعضاء التدريس</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الصوره</th>
+                                    <th>الاسم</th>
+                                    <th>المنصب</th>
+                                    <th>سيرة شخصية</th>
+                                    <th>تعديل عضو</th>
+                                    <th>حذف عضو</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                        <tr>
+                                            <td>
+                                                <span class="list-img"><img src="~/uploads/staff/@item.StaffImageName" alt="" asp-append-version="true" ></span>
+                                            </td>
+                                            <td>
+                                            <a><span class="list-enq-name">د/ @item.StaffName</span></a>
+                                            </td>
+                                            <td>@item.StaffPosition</td>
+                                        @if (item.Biograpghy.Length < 50)
+                                        {
+                                            <td>@item.Biograpghy</td>
+
+                                        }
+                                        else
+                                        {
+                                            <td>@item.Biograpghy.Substring(0, 50) ........</td>
+                                        }
+                                            <td><a asp-action="Edit" asp-controller="Staffs" asp-route-id="@item.StID" class="ad-st-view-edit">تعديل </a></td>
+                                                    <td><a asp-action="Delete" asp-controller="Staffs" asp-route-id="@item.StID" class="ad-st-view-delete">حذف</a></td>
+                                        </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

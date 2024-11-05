@@ -1,0 +1,136 @@
+﻿@model EventsViewModel
+
+<style>
+    .textsizespearker{
+        font-size:22px;
+    }
+
+</style>
+
+<section class="page-title-section overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary">المؤتمرات و الندوات </a></li>
+                    <li class="list-inline-item text-white h3 font-secondary nasted">@Model.EventTitle</li>
+                </ul>
+                <p class="text-lighten">هنا يمكنك معرفه تفاصيل هن عن المؤتمر او الندوه التي ستقام.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">@Model.EventTitle</h2>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <img src="~/uploads/events/@Model.EventImageName" width="1125" height="563" asp-append-version="true" >
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-9">
+                <ul class="list-inline">
+                    <li class="list-inline-item mr-xl-5 mr-4 mb-3 mb-lg-0">
+                        <div class="d-flex align-items-center">
+                            <i class="ti-location-pin text-primary icon-md mr-2"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">المكان</h6>
+                                <p class="mb-0">@Model.EventLocation</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item mr-xl-5 mr-4 mb-3 mb-lg-0">
+                        <div class="d-flex align-items-center">
+                            <i class="ti-calendar text-primary icon-md mr-2"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">التاريخ</h6>
+                                <p class="mb-0">@Model.DateMonth @Model.DateDay</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item mr-xl-5 mr-4 mb-3 mb-lg-0">
+                        <div class="d-flex align-items-center">
+                            <i class="ti-time text-primary icon-md mr-2"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">الميعاد</h6>
+                                <p class="mb-0">@Model.Time</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item mr-xl-5 mr-4 mb-3 mb-lg-0">
+                        <div class="d-flex align-items-center">
+                            <i class="ti-wallet text-primary icon-md mr-2"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">رسوم الدخول</h6>
+                                <p class="mb-0">مجاني</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 mt-4 order-4">
+                <div class="border-bottom border-primary"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-50">
+                <h3>شرح عن المؤتمر</h3>
+                <p>
+                   @Model.EventDescription
+                </p>
+                <p>
+                    انضم إلينا في حدث مثير مليء بالأنشطة المثيرة، والمناقشات المفيدة، وفرص التواصل. استكشف أفكارًا جديدة، وتواصل مع الأفراد ذوي التفكير المماثل، واحصل على رؤى قيمة من خبراء الصناعة. لا تفوت هذه الفرصة لتستلهم وترفع مهاراتك إلى المستوى التالي
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-4">المتحدثون</h3>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                <div class="media">
+                    <img class="mr-3 img-fluid" src="~/uploads/staff/teacher1.jpg" alt="speaker" width="85" height="85" asp-append-version="true" >
+                    <div class="media-body">
+                        <h4 class="mt-0 textsizespearker">د/ طارق علي</h4>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                <div class="media">
+                    <img class="mr-3 img-fluid" src="~/uploads/staff/teacher2.jpg" alt="speaker" width="85" height="85" asp-append-version="true" >
+                    <div class="media-body">
+                        <h4 class="mt-0 textsizespearker">د/ عبد المنعم حلمي</h4>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                <div class="media">
+                    <img class="mr-3 img-fluid" src="~/uploads/staff/teacher3.jpg" alt="speaker" width="85" height="85" asp-append-version="true">
+                    <div class="media-body">
+                        <h4 class="mt-0 textsizespearker">د/ عاطف رسلان</h4>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                <div class="media">
+                    <img class="mr-3 img-fluid" src="~/uploads/staff/teacher3.jpg" alt="speaker" width="85" height="85" asp-append-version="true">
+                    <div class="media-body">
+                        <h4 class="mt-0 textsizespearker">د/ أشرف عبد المنعم</h4>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-4 order-4">
+                <div class="border-bottom border-primary"></div>
+            </div>
+        </div>
+    </div>
+</section>

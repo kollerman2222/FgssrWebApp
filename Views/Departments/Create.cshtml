@@ -1,0 +1,49 @@
+﻿@model DiplomasDepartmentsViewModel
+
+@{
+    ViewData["Title"] = "Add Department";
+    Layout = "_DashboardLayout";
+}
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp admin-form">
+                <div class="inn-title">
+                    <h4>إضافه برنامج جديد</h4>
+                </div>
+                <div class="tab-inn">
+                    <form class="form" method="post" asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">اسم البرنامج</span>
+                                    <input asp-for="DepartmentName" type="text">
+                                    <span asp-validation-for="DepartmentName" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">الوصف</span>
+                                <textarea rows="6" asp-for="Description"></textarea>
+                                <span asp-validation-for="Description" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="waves-effect waves-light btn-large waves-input-wrapper"><input type="submit" class="waves-button-input CreateSubmitButton" value="إضافه البرنامج"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+           
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

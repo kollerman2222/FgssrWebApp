@@ -1,0 +1,46 @@
+﻿@model IEnumerable<EventsViewModel>
+
+
+<section class="page-title-section overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary">المؤتمرات و الندوات </a></li>
+                </ul>
+                <p class="text-lighten">هنا يمكنك العثور على جميع الأحداث والندوات القادمة التي تقام في الكلية.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="row">
+
+            @foreach(var item in Model)
+            {
+                <div class="col-lg-4 col-sm-6 mb-5">
+                <div class="card border-0 rounded-0 hover-shadow">
+                    <div class="card-img position-relative">
+                        <img class="card-img-top rounded-0" src="~/uploads/events/@item.EventImageName" alt="event thumb" width="350" height="229" asp-append-version="true" >
+                        <div class="card-date"><span>18</span><br>@item.DateMonth</div>
+                    </div>
+                    <div class="card-body">
+                        <p><i class="ti-location-pin text-primary mr-2"></i>@item.EventLocation</p>
+                         <h4 class="card-title">@item.EventTitle</h4>
+                    </div>
+
+                     <div class="card-body">
+
+                            <a asp-controller="Home" asp-action="eventdetails" asp-route-id="@item.EveId" class="btn btn-primary btn-sm">عرض التفاصيل</a>
+
+                     </div>
+
+                </div>
+            </div>
+            }
+           
+           
+        </div>
+    </div>
+</section>

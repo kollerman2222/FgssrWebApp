@@ -1,0 +1,301 @@
+﻿@model DiplomasSectionsViewModel
+
+
+<style>
+    .addmargin{
+        margin-top:70px;
+    }
+
+
+    .textcolor{
+
+        color:black !important;
+    }
+
+    .textsize{
+        font-size:18px !important;
+    }
+
+    .diplomawrapper{
+        display: none;
+        margin-top:40px;
+    }
+
+    .masterwrapper {
+        display: none;
+        margin-top: 40px;
+    }
+
+    .doctorwrapper {
+        display: none;
+        margin-top: 40px;
+    }
+
+    .showwrapper{
+        display:block;
+    }
+
+    th{
+        text-align:center;
+        vertical-align:middle !important;
+        font-size:18px;
+    }
+
+    td{
+        text-align: center;
+        vertical-align: middle !important;
+        font-size: 17px;
+        padding: 2px !important;
+    }
+
+    .table td p {
+        font-size:16px !important;
+        line-height:1 !important;
+    }
+
+    .imgwrapper{
+
+        text-align:center;
+    }
+
+</style>
+
+<section class="page-title-section overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary">@Html.Raw(Model.Department?.DepartmentName == "برامج مهنيه" ? "برامج مهنيه" : "برامج اكاديميه")</a></li>
+                    <li class="list-inline-item text-white h3 font-secondary nasted">@Model.SectionName</li>
+                </ul>
+                <p class="text-lighten">برامج الدبلوم لدينا توفر فوائد قيمة مناسبة لجميع مستويات المهارات، مما يضمن تجربة مجزية للجميع.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-sm" style="padding-left: 20px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4 imgwrapper">
+                <img src="~/uploads/sections/@Model.SectionImage" class="img-fluid w-100" width="1125" height="563" asp-append-version="true" >
+            </div>
+        </div>
+        <div class="row align-items-center mb-5">
+            <div class="col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0">
+                <h2>@Model.SectionName</h2>
+            </div>
+            <div class="col-xl-6 order-sm-3 order-xl-2 col-12 order-2">
+                <ul class="list-inline text-xl-center">
+                    <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+                        <div class="d-flex align-items-center">
+                            <i class="ti-book text-primary icon-md mr-2"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">مده البرنامج</h6>
+                                <p class="mb-0">@Html.Raw(Model.Department?.DepartmentName == "برامج مهنيه" ? "1 عام دراسي" : "2 عام دراسي") </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+                        <div class="d-flex align-items-center">
+                            <i class="ti-alarm-clock text-primary icon-md mr-2"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">الفصول الدراسيه</h6>
+                                <p class="mb-0">@Html.Raw(Model.Department?.DepartmentName == "برامج مهنيه" ? "<span class='text-success'> 2 فصل دراسي </span>" : "<span class='text-danger'> 4 فصول دراسيه </span>")</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+                        <div class="d-flex align-items-center">
+                            <i class="ti-check-box text-primary icon-md mr-2"></i>
+                            <div class="text-left">
+                                <h6 class="mb-0">النشاط</h6>
+                                <p class="mb-0">@Html.Raw(Model.isActive ? "متاحه" : "غير متاحه")</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xl-3 text-sm-right text-left order-sm-2 order-3 order-xl-3 col-sm-6 mb-4 mb-xl-0">
+                <a asp-action="Admission" asp-controller="Users" asp-route-diplomaId="@Model.SecId" class="btn btn-primary"> تقديم طلب الإلتحاق</a>
+            </div>
+            <div class="col-12 mt-4 order-4">
+                <div class="border-bottom border-primary"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-4">
+                <h3>شرح عن البرنامج</h3>
+                <p class="textcolor">
+                    @Model.Description
+                </p>
+            </div>
+            <div class="col-12 mb-4 addmargin">
+                <h3>المقررات الدراسية</h3>
+
+                <a id="diploma" class="btn btn-primary-custom" style="margin-top:15px;">دبلومه</a>
+                <a id="master" class="btn btn-primary-custom " style="margin-top:15px; margin-right:25px;">ماجستير</a>
+                <a id="doctor" class="btn btn-primary-custom " style="margin-top:15px; margin-right:25px;">دكتوراه</a>
+            </div>
+
+
+            <div class="table-responsive diplomawrapper">
+                <div class="col-12 mb-4">
+                <h3>مقررات الدبلوم</h3>
+                </div>
+                <table class="table table-bordered" style="width:65% !important;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>كود المقرر</th>
+                            <th>اسم المقرر</th>
+                            <th>عدد الساعات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model.Subjects.Where(s=>s.ScientificDegree=="Diploma"))
+                        {
+                            <tr>
+                                <td style="width: 10%;">@item.SubjectCode</td>
+                                <td>
+                                    <p>@item.SubjectNameArabic</p>
+                                    <p>@item.SubjectNameEnglish</p>
+                                </td>
+                                <td style="width: 10%;">@item.SubjectHours</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-responsive masterwrapper">
+                <div class="col-12 mb-4">
+                <h3>مقررات الماجستير</h3>
+                </div>
+                <table class="table table-bordered" style=" width:65% !important;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>كود المقرر</th>
+                            <th>اسم المقرر</th>
+                            <th>عدد الساعات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Subjects.Where(s => s.ScientificDegree == "Masters"))
+                        {
+                            <tr>
+                                <td style="width: 10%;">@item.SubjectCode</td>
+                                <td>
+                                    <p>@item.SubjectNameArabic</p>
+                                    <p>@item.SubjectNameEnglish</p>
+                                </td>
+                                <td style="width: 10%;">@item.SubjectHours</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-responsive doctorwrapper">
+                <div class="col-12 mb-4">
+                <h3>مقررات الدكتوراه</h3>
+                </div>
+                <table class="table table-bordered" style=" width:65% !important;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>كود المقرر</th>
+                            <th>اسم المقرر</th>
+                            <th>عدد الساعات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Subjects.Where(s => s.ScientificDegree == "Doctors"))
+                        {
+                            <tr>
+                                <td style="width: 10%;">@item.SubjectCode</td>
+                                <td>
+                                    <p>@item.SubjectNameArabic</p>
+                                    <p>@item.SubjectNameEnglish</p>
+                                </td>
+                                <td style="width: 10%;">@item.SubjectHours</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12 mb-4 addmargin">
+                <h3>شروط التقديم</h3>
+                <p>
+                <p class="textcolor"> تم تصميم البرامج لدينا لاستيعاب الأفراد من جميع مستويات المهارات، سواء كنت مبتدئًا أو محترفًا متمرسًا يسعى إلى تعزيز معرفته ومهاراته. نحن نؤمن بتوفير بيئة تعليمية شاملة حيث يمكن للجميع الازدهار والنجاح.</p>
+                <p class="textcolor">
+                    بالإضافة إلى الشغف بالتعلم والتفاني في النمو الشخصي، قد تحتوي برامج الدبلوم لدينا على متطلبات محددة تعتمد على مستوى تعليمك السابق. يرجى مراجعة تفاصيل البرنامج لمزيد من المعلومات حول أي متطلبات أكاديمية أو شروط خاصه مطلوبة للقبول <a class="btn btn-primary" asp-controller="Home" asp-action="HowToApply" asp-route-departmentName="@(Model.Department?.DepartmentName=="برامج مهنيه" ?"برامج مهنيه" : "برامج اكاديميه" )">إضغط هنا </a>
+                </p>
+                </p>
+            </div>
+            @* <div class="col-12 mb-4">
+                <h3 class="mb-3">شروط التقديم</h3> <br /> <br />
+                <div class="col-12 px-0">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-styled">
+                                <p class="textcolor"> تم تصميم برامج الدبلوم لدينا لاستيعاب الأفراد من جميع مستويات المهارات، سواء كنت مبتدئًا أو محترفًا متمرسًا يسعى إلى تعزيز معرفته ومهاراته. نحن نؤمن بتوفير بيئة تعليمية شاملة حيث يمكن للجميع الازدهار والنجاح.</p>
+                                <p class="textcolor">بالإضافة إلى الشغف بالتعلم والتفاني في النمو الشخصي، قد تحتوي برامج الدبلوم لدينا على متطلبات محددة تعتمد على مستوى تعليمك السابق. يرجى مراجعة تفاصيل البرنامج لمزيد من المعلومات حول أي متطلبات أكاديمية أو شروط خاصه مطلوبة للقبول</p>
+                                <p class="textcolor">للمزيد من التفاصيل عن التقديم و القبول <a class="btn btn-primary" asp-controller="Home" asp-action="HowToApply">إضغط هنا </a></p>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> *@
+            <div class="col-12 mb-4 addmargin">
+                <h3 class="mb-5 mt-3">طريقه التقديم</h3>
+                <ul class="list-styled">
+                    <li class="textsize">
+                        يجب عليك تسجيل الدخول للموقع @Html.Raw(User.Identity.IsAuthenticated ? "" : "<a href='/account/login' class='btn btn-primary'>تسجيل الدخول</a>   <a href='/account/register' class='btn btn-primary'>الإشتراك</a>")
+                    </li>
+                    <li class="textsize">
+                        بعد تسجيل الدخول بنجاح، يمكنك التقديم لأي دبلوم ترغب فيه، ولكن قبل أن تبدأ في التقديم، يجب عليك تفعيل عنوان بريدك الإلكتروني، يمكنك ببساطة القيام بذلك عن طريق زيارة صفحة حسابك الشخصي. @Html.Raw(User.Identity.IsAuthenticated ? "<a href='/account/profile' class='btn btn - primary'>حسابك الشخصي</a>" : "")
+                    </li>
+                    <li class="textsize">
+                        بعد إكمال الخطوات السابقة، يمكنك البدء في التقديم <a asp-action="Admission" asp-controller="Users" asp-route-diplomaId="@Model.SecId" class="btn btn-primary"> تقديم طلب الإلتحاق</a>
+                        
+                    </li>
+                    <li class="textsize">
+                        ثم يجب عليك الانتظار حتى يقوم المشرف بمراجعة والموافقة علي طلبك.
+                    </li>
+                    <li class="textsize">
+                        وأخيرًا، بعد الموافقة على طلبك، يمكنك زيارة مقر الكلية لبدء دفع الرسوم وتقديم الوثائق المطلوبة.
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 mb-5 addmargin">
+                <h3>المصاريف الإداريه و مصاريف البرنامج</h3>
+                <p class="textcolor">
+                   يتم تحديدها بمعرفه الكليه و شروطها
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /section -->
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#diploma').on('click', function () {
+                $('.diplomawrapper').toggleClass('showwrapper');
+                $('.masterwrapper, .doctorwrapper').removeClass('showwrapper');
+            });
+
+            $('#master').on('click', function () {
+                $('.masterwrapper').toggleClass('showwrapper');
+                $('.diplomawrapper, .doctorwrapper').removeClass('showwrapper');
+            });
+
+            $('#doctor').on('click', function () {
+                $('.doctorwrapper').toggleClass('showwrapper');
+                $('.diplomawrapper, .masterwrapper').removeClass('showwrapper');
+            });
+        });
+
+    </script>
+
+}

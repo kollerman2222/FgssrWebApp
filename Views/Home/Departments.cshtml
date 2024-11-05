@@ -1,0 +1,106 @@
+﻿@model IEnumerable<DiplomasDepartmentsViewModel>
+
+
+<style>
+    .bigdive {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 8%; 
+        margin-top: 6%; 
+    }
+
+        .bigdive a {
+            display: block; /* Make anchor tags block-level */
+            text-decoration: none; /* Remove default underline */
+        }
+        .bigdive img {
+            width: 90%; 
+            max-width: 600px; 
+            height: auto; 
+            transition: transform 0.2s;
+        }
+
+            .bigdive img:hover {
+                transform: scale(1.05); 
+            }
+
+    .imageleft {
+        margin-right: 2%; 
+    }
+
+    .imageright {
+        margin-left: 2%; 
+    }
+
+
+  
+
+    .column {
+        text-align:center !important;
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+        margin-top:110px;
+        margin-bottom:110px;
+    }
+
+    .centertext {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color:white;
+        font-size:50px;
+
+    }
+
+    .imgwrapper{
+        position: relative;
+        text-align: center;
+    }
+
+</style>
+
+
+<section class="page-title-section overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary">البرامج </a></li>
+                </ul>
+                <p class="text-lighten">
+                    نحن هنا لمساعدتك في استكشاف والنجاح في مجال الدراسة الذي اخترته، ستجد مجموعة متنوعة من البرامج المصممة لتلبية احتياجاتك التعليمية، لدينا اشياء تناسب للجميع.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+@foreach(var item in Model)
+{
+        if (item.DepartmentName == "برامج مهنيه")
+        {
+             <div class="column imgwrapper">
+                <a asp-controller="Home" asp-action="Diplomas" asp-route-departmentSearch="@item.DepartmentName">
+                    <img  src="~/images/library.webp" width="75%" alt="No image" asp-append-version="true">
+                    <p class="centertext">@item.DepartmentName</p>
+                    </a>
+            </div>
+        }
+        else
+        {
+            <div class="column imgwrapper">
+                <a href="javascript:void(0)">
+                    <img src="~/images/library.webp" width="75%" alt="No image" asp-append-version="true">
+                    <p class="centertext">@item.DepartmentName</p>
+                </a>
+            </div>
+            
+        }
+
+}
+</div>
+

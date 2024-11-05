@@ -1,0 +1,190 @@
+﻿
+<style>
+    .bigdive {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 8%;
+        margin-top: 6%;
+    }
+
+        .bigdive a {
+            display: block; /* Make anchor tags block-level */
+            text-decoration: none; /* Remove default underline */
+        }
+
+        .bigdive img {
+            width: 90%;
+            max-width: 600px;
+            height: auto;
+            transition: transform 0.2s;
+        }
+
+            .bigdive img:hover {
+                transform: scale(1.05);
+            }
+
+    .imageleft {
+        margin-right: 2%;
+    }
+
+    .imageright {
+        margin-left: 2%;
+    }
+
+    .text {
+        font-size: 40px;
+        font-weight: 600;
+        color: black;
+        padding-top: 70px;
+        padding-right: 50px;
+    }
+
+    .hideboth {
+        display: none;
+    }
+
+    .position{
+        font-size:20px !important;
+        font-weight: bold;
+        color:black;
+    }
+</style>
+
+
+
+<div class="hideboth" id="developers">
+    <section class="page-title-section overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-inline custom-breadcrumb">
+                        <li class="list-inline-item"><a class="h3 text-primary font-secondary">أعضاء فريق مطوري الموقع </a></li>
+                    </ul>
+                    <p class="text-lighten">
+                       هنا يمكنك العثور على معلومات حول أعضاء فريق مطوري الموقع.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+       <div class="text-center">
+            <section class="section">
+    <div data-ref="mixitup-target" class="container">
+        <div class="row" data-ref="mixitup-container">
+
+                    <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law">
+                        <div class="card border-0 rounded-0 hover-shadow">
+                            <img class="card-img-top rounded-0" src="~/images/usermale.webp" alt="student" width="355" height="400" asp-append-version="true">
+                            <div class="card-body">
+                                <h4 class="card-title">Sameh Taha</h4>
+                                <p class="position">Testing & Database</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law">
+                        <div class="card border-0 rounded-0 hover-shadow">
+                            <img class="card-img-top rounded-0" src="~/images/userfemale.webp" alt="teacher" width="355" height="400" asp-append-version="true">
+                            <div class="card-body">
+                                <h4 class="card-title">Naglaa Ahmed</h4>
+                                <p class="position">Front-End</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law">
+                        <div class="card border-0 rounded-0 hover-shadow">
+                            <img class="card-img-top rounded-0" src="~/images/usermale.webp" alt="teacher" width="355" height="400" asp-append-version="true">
+                            <div class="card-body">
+                                <h4 class="card-title">Ahmed Moataz</h4>
+                                <p class="position">Back-End</p>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        </div>
+    </div>
+</section>
+    </div>
+</div>
+
+<div class="hideboth" id="college">
+    <section class="page-title-section overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-inline custom-breadcrumb">
+                        <li class="list-inline-item"><a class="h3 text-primary font-secondary">تاريخ الكلية وإنجازاتها</a></li>
+                    </ul>
+                    <p class="text-lighten">
+                        هنا يمكنك العثور على معلومات حول تاريخ الكلية وإنجازاتها وقصص نجاحها.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+        <div class="text-center">
+        <img src="~/images/aboutcollege1.webp" alt="No image" asp-append-version="true"> <br />
+        <img src="~/images/aboutcollege2.webp" alt="No image" asp-append-version="true"> <br />
+        <img src="~/images/aboutcollege3.webp" alt="No image" asp-append-version="true"> <br />
+        <img src="~/images/aboutcollege4.webp" alt="No image" asp-append-version="true">
+    </div>
+
+
+</div>
+
+
+<div id="selection">
+    <section class="page-title-section overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="list-inline custom-breadcrumb">
+                        <li class="list-inline-item"><a class="h3 text-primary font-secondary">عن الكلية وفريق مطوري الموقع </a></li>
+                    </ul>
+                    <p class="text-lighten">
+                        هنا يمكنك العثور على معلومات حول تاريخ الكلية وأيضًا معلومات حول فريق مطوري الموقع.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    @*     <h2 class="d-flex justify-content-center text"> Admission and Registration Regulations </h2>
+    *@
+    <div class="bigdive">
+        <a id="showdevelopersstuff"><img class="imageleft" src="~/images/developers.webp" alt="No image" asp-append-version="true"></a>
+        <a id="showcollegestuff"><img class="imageleft" src="~/images/college.webp" alt="No image" asp-append-version="true"></a>
+    </div>
+</div>
+
+
+@section scripts {
+
+
+    <script>
+        $(document).ready(function () {
+            $('#showdevelopersstuff').click(function () {
+                $('#selection').hide();
+                $('#developers').show();
+                $('#collegef').hide();
+
+            });
+
+            $('#showcollegestuff').click(function () {
+                $('#selection').hide();
+                $('#developers').hide();
+                $('#college').show();
+            });
+
+
+        });
+
+    </script>
+
+}
+
+
+

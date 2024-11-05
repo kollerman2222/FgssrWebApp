@@ -1,0 +1,193 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);   
+}
+
+@* <div class="chat_avatar"> image code for chat instead of username 
+    <img src="/uploads/users/${userImage}" />
+</div> *@
+@* <style>
+    .chat_msg_item div {
+        display: block;
+        clear: both; 
+    }
+</style> *@
+
+<body>
+    <div class="fabs">
+        <div class="chat">
+            <div class="chat_header">
+                <div class="chat_option">
+                    <div class="header_img">
+                        <img src="~/images/chatlogo.webp" asp-append-version="true" >
+                    </div>
+                    <span id="chat_head">Public Chat</span> <br> <span class="agent"></span> <span class="online ml-3">(Online)</span>
+                </div>
+            </div>
+            @if(SignInManager.IsSignedIn(User))
+            {
+
+
+                <div class="chat_body chat_login">
+                    <a  id="chat_first_screen" class="fabSignIn">Start Chat</a>
+                  <p>هذه محادثة عامة، يرجى توخي الحذر دائمًا وعدم مشاركة أي معلومات حساسة، ولن نطلب منك كلمة المرور الخاصة بك أبدًا </p>
+                </div>
+                <div id="chat_converse" class="chat_conversion chat_converse">
+                    <div class="chat_msg_item chat_msg_item_admin">
+                    
+                        @* admin here*@
+                    </div>
+                 @* user here *@
+                </div>
+                <div class="fab_field ">
+                    <a id="fab_camera" class="fab"><i class="zmdi zmdi-camera"></i></a>
+                    <a id="fab_send" class="fab"><i class="zmdi zmdi-mail-send"></i></a>
+                    <textarea id="chatSend" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
+                </div>
+            }
+            else
+            {
+                <div class="chat_body chat_login">
+                    <a href="/account/login" id="chat_first_screen" class="fabSignIn">
+                        Login
+                    </a>
+                    <p>يجب عليك تسجيل الدخول لبدء الدردشة </p>
+                </div>
+            }
+        </div>
+        <a id="prime" class="fab"><i class="prime zmdi zmdi-comment-outline"></i></a>
+    </div>
+
+   <script src="~/lib/jquery/dist/jquery.min.js"></script>
+   <script src="~/chat/testchatjs.js" asp-append-version="true"></script>
+</body>
+
+<script>
+
+    $('#chat_first_screen').click(function () {
+        $('.fab_field').addClass('showmessage');
+    });
+
+</script>
+
+
+
+ <script>
+    $(document).ready(function () {
+      
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+       
+        connection.start().then(() => {
+            console.log("SignalR Connected");
+        }).catch(err => {
+            console.error("SignalR Connection Error: ", err);
+        });
+
+       
+        connection.on("ReceiveMessage", (user, message, profileImage) => {
+            const userImage = profileImage;
+            if (user === "@Context.User?.Identity?.Name") {
+                
+                $('.chat_converse').append(`<span class="chat_msg_item chat_msg_item_user">${message}</span>`);
+            } else {
+
+                if (userImage != null) 
+                {
+                    $('.chat_converse').append(`<span class="chat_msg_item chat_msg_item_admin_text">${user}</span> <div class="chat_msg_item chat_msg_item_admin">
+
+                                    <div class="chat_avatar"><img src="/uploads/users/${userImage}" /></div>
+                                            ${message}
+                                        </div>`);
+                }
+                else 
+                {
+                    $('.chat_converse').append(`<span class="chat_msg_item chat_msg_item_admin_text">${user}</span> <div class="chat_msg_item chat_msg_item_admin">
+
+                                            <div class="chat_avatar"><img src="/images/chaticon.webp" /></div>
+                                                ${message}
+                                            </div>`);
+
+                }
+
+               
+                
+
+            }
+        });
+
+       
+        function sendMessage(currentUser,message) {
+           
+            connection.invoke("SendMessage",currentUser, message).catch(err => {
+                console.error("SignalR  Error: ", err);
+            });
+        }
+
+        
+        $('#fab_send').click(function () {
+            const message = $('#chatSend').val();
+            const currentUser = "@Context.User.Identity.Name";
+            sendMessage(currentUser,message);
+            $('#chatSend').val('');
+        });
+    });
+    
+</script>
+
+
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("GetChatMessage", "Home")',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    data.forEach(function (message) {
+                    console.log(message.senderName); // Access senderName
+                    console.log(message.content); // Access content
+
+                    var currentUserName = '@Context.User.Identity.Name';
+
+                    if (message.senderName === currentUserName)
+                    {
+                        $('.chat_converse').append(`<span class="chat_msg_item chat_msg_item_user">${message.content}</span>`);
+                    }
+                    else 
+                    {
+                        if (message.profileImage != null) {
+                            $('.chat_converse').append(`<span class="chat_msg_item chat_msg_item_admin_text">${message.senderName}</span> <div class="chat_msg_item chat_msg_item_admin">
+
+                                            <div class="chat_avatar"><img src="/uploads/users/${message.profileImage}" /></div>
+                                                    ${message.content}
+                                            </div>`);
+                        }
+                        else {
+                            $('.chat_converse').append(`<span class="chat_msg_item chat_msg_item_admin_text">${message.senderName}</span> <div class="chat_msg_item chat_msg_item_admin">
+
+                                                <div class="chat_avatar"><img src="/images/chaticon.webp" /></div>
+                                                        ${message.content}
+                                                </div>`);
+
+                        }
+                    }
+                });
+                },
+
+
+
+                error: function (error) {
+                    console.error("Error loading message: ", error);
+                }
+            });
+        });
+    </script>
+
+

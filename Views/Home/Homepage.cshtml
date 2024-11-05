@@ -1,0 +1,374 @@
+﻿@model DashboardViewModel
+
+<style>
+    .this{
+        /* all:initial; */
+        margin-top: -150px !important;
+    }
+
+    .deantext{
+        color:white;
+        font-size:18px;
+    }
+    .full{
+        padding-top:10px;
+        background: #02294e !important;
+    }
+    .text{
+    font-size:50px !important;
+    }
+
+    .text2{
+        font-size: 20px !important; 
+    }
+
+    .text3{
+        font-size:25px !important;
+    }
+
+    
+</style>
+
+<section>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="item slider1 active">
+                <img id="brightness-adjusted-image" src="~/images/sliderimage1.webp" alt="" asp-append-version="true" >
+                <div class="carousel-caption slider-con">
+                    <h2>
+                        كليه الدراسات العليا للبحوث الاحصائية<br /><br /><span class="text">بوابه التسجيل و القبول</span>
+                        
+                    </h2><br />
+                    <p class="text3">فتح باب قبول الطلبات لعام 2025</p>
+                    <a asp-action="HowToApply" asp-controller="Home" class="bann-btn-2 text2">شروط التقديم</a><a asp-action="Departments" asp-controller="Home" class="bann-btn-1 text2">  البرامج</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="wed-hom-ser">
+                <ul>
+                   @*  <li>
+                        <a href="" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img src="~/images/h-ic1.webp" alt="" asp-append-version="true" > الاكاديمي</a>
+                    </li>
+                    <li>
+                        <a href="" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img src="~/images/h-ic2.webp" alt="" asp-append-version="true" > التقديم</a>
+                    </li>
+                    <li>
+                        <a href="" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img src="~/images/h-ic4.webp" alt="" asp-append-version="true"> البرامج</a>
+                    </li>
+                    <li>
+                        <a href="" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img src="~/images/h-ic3.webp" alt="" asp-append-version="true" > ندوات</a>
+                    </li> *@
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container com-sp pad-bot-70">
+        <div class="row">
+            <div class="con-title">
+                <h2><span>ما يوجد</span> لدينا </h2>
+                <p> يوجد برامج و انشطه طلابيه مختلفه تتمثل في المؤتمرات و ندوات البحث و التطوير و اكثر من ذلك</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ed-course">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="ed-course-in">
+                        <a class="course-overlay">
+                            <img src="~/images/h-about.webp" alt="" asp-append-version="true" >
+                            <span>برامج أكاديمية</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="ed-course-in">
+                        <a class="course-overlay">
+                            <img src="~/images/ev-bg1.webp" alt="" asp-append-version="true" >
+                            <span>برامج مهنية</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="ed-course-in">
+                        <a class="course-overlay">
+                            <img src="~/images/ev-bg.webp" alt="" asp-append-version="true" >
+                            <span>ملف الطالب</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="ed-course-in">
+                        <a class="course-overlay">
+                            <img src="~/images/h-res.webp" alt="" asp-append-version="true" >
+                            <span>البحث والتعليم</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="ed-course-in">
+                        <a class="course-overlay">
+                            <img src="~/images/h-about1.webp" alt="" asp-append-version="true" >
+                            <span>التقديم و القبول</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="ed-course-in">
+                        <a class="course-overlay">
+                            <img src="~/images/h-adm.webp" alt="" asp-append-version="true" >
+                            <span> هيئة تدريس معتمدة</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="ed-course-in">
+                        <a class="course-overlay">
+                            <img src="~/images/h-cam1.webp" alt="" asp-append-version="true" >
+                            <span>الفعاليات</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="ed-course-in">
+                        <a class="course-overlay" href="events.html">
+                            <img src="~/images/h-res1.webp" alt="" asp-append-version="true" >
+                            <span>مشاركة المجتمع</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pop-cour">
+    <div class="container com-sp pad-bot-70">
+        <div class="row">
+            <div class="con-title">
+                <h2><span>أحدث</span> البرامج الدراسيه</h2>
+                <p>اكتشف برامج الدبلوم الجديدة لدينا، المصممة لتلبية أحدث الطلبات والاتجاهات في مجالات مختلفة</p>
+            </div>
+        </div>
+    </div>
+        <section class="section this">
+            <div class="container">
+                <div class="row justify-content-center">
+                    @foreach(var dip in Model.Sections.TakeLast(3))
+                    {
+                        <div class="col-lg-4 col-sm-6 mb-5">
+                        <div class="card p-0 border-primary rounded-0 hover-shadow">
+                            <img class="card-img-top rounded-0" src="~/uploads/sections/@dip.SectionImage" alt="course thumb" width="343" height="263" asp-append-version="true" >
+                            <div class="card-body">
+                                <ul class="list-inline mb-2">
+                                    <li class="list-inline-item">@dip.Department?.DepartmentName</li>
+                                    <li class="list-inline-item"><a class="text-color">@Html.Raw(dip.isActive ? "<span class='text-success'>Avaliable</span>" : "<span class='text-danger'>Not Avaliable</span>")</a></li>
+                                </ul>
+                                <a>
+                                    <h4 class="card-title">@dip.SectionName</h4>
+                                </a>
+                                <p class="card-text mb-4">
+                                    @if(dip.Description?.Length < 117)
+                                    {
+                                        @dip.Description
+                                    }
+                                    else
+                                    {
+                                      @dip.Description?.Substring(0,117);
+                                    }
+                                </p>
+                                <a asp-action="diplomadetails" asp-controller="Home" asp-route-id="@dip.SectionId" class="btn btn-primary btn-sm">عرض التفاصيل</a>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    
+                </div>
+            </div>
+        </section>
+
+</section>
+
+
+<section>
+    <div class="full-bot-book">
+        <div class="container">
+            <div class="row">
+                <div class="col pr-5 pt-3">
+                   <iframe width="560" height="315" src="https://www.youtube.com/embed/IlP-SjEA7zs?si=-ezrLzqF6kTHP7zY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+               </div>
+                <div class="col pl-5">
+
+                    <h4 class="pb-3" style="font-size:25px;">
+                        كلمة الأستاذ الدكتور/  عصام علي أمين , عميد الكلية</p>
+                        <p class="deantext">
+                            
+                            لا أجد خيرا من تقديم كليتنا العريقة سوى بأن أقدمها من خلال رسالتها والتي خلصت
+                            من فكر أساتذتها وأؤكد على معانيها ، فقد انبثقت رسالة الكلية في
+                            اعتماد طرق تدريس متميزه وبرامج تعليميه شامله وعالية الجودة وتتماشى مع
+                            متطلبات المجتمع وسوق العمل وإجراء البحوث الإبداعية، من خلال خلق بيئة إدارية
+                            وأكاديمية محفزة تمكن من الاستغلال الامثل للموارد والتكنولوجيا الحديثة وبناء الشراكة
+                            مع المجتمع المحلي والدولي وطرح دورات تدريبية وبرامج مهنيه للعاملين في المنظمات
+                            المختلفة وتدريب الكوادر الاداريه كجزء من نشاط خدمات المجتمع وتعزيز الفضول
+                            الفكري والمرونة للنمو مع تطوير التكنولوجيا والأساليب في الإحصاء وعلوم
+                            الحاسب ونظم وتكنولوجيا المعلومات ونظم دعم واتخاذ القرار وعلوم البيانات والتعامل مع
+                            البيانات الكبيرة"
+                        </p>
+                    </h4>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section>
+    <div class="container com-sp pad-bot-0">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ho-ev-latest ho-ev-latest-bg-1">
+                    <div class="ho-lat-ev">
+                        <h4>المؤتمرات و الندوات</h4>
+                        <p>ابق على اطلاع بأحداثنا القادمة، بدءًا من ورش العمل والندوات إلى المؤتمرات لإثراء رحلتك الأكاديمية والمهنية.</p>
+                    </div>
+                </div>
+                <div class="ho-event ho-event-mob-bot-sp">
+                    <ul>
+                        @foreach(var eve in Model.Events.TakeLast(3))
+                        {
+                            <li>
+                            <div class="ho-ev-date">
+                                <span>@eve.DateDay</span><span>@eve.DateMonth,2024</span>
+                            </div>
+                            <div class="ho-ev-link">
+                                    <a asp-action="EventDetails" asp-controller="Home" asp-route-id="@eve.EventId">
+                                    <h4>@eve.EventTitle</h4>
+                                </a>
+                                <p>@eve.EventDescription</p>
+                                <span>@eve.Time</span>
+                            </div>
+                        </li>
+                        }
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<section>
+    <div>
+        <div class="container com-sp pad-bot-70">
+            <div class="row">
+                <div class="con-title pb-5" style="padding-right:42% !important">
+                    <h2><span> معرض </span>الصور</h2>
+                </div>
+                <div class="cor about-sp h-gal ed-pho-gal">
+                    <ul>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean1.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean2.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean3.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean4.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean5.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean6.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean7.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean8.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean9.webp" alt="">
+                        </li>
+                        <li>
+                            <img class="materialboxed" data-caption="Education master image captions" src="~/images/newdean10.webp" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container com-sp">
+        <div class="row">
+            <div class="con-title">
+                <h2><span> أخر</span>الاخبار</h2>
+                <p>قم بمتابعتنا لمعرفه اخر و أحدث الاخبار و الانجازات ، لتبقي على علم و اطلاع بكل ما هو جديد و حصري</p>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-8">
+                <div class="bot-gal h-blog ho-event">
+                    <h4 class="text2">الاخبار</h4>
+                    <div class="ho-event">
+                        <ul>
+                            @foreach(var news in Model.News.TakeLast(3))
+                            {
+                                <li>
+                                <div class="ho-ev-date">
+                                    <span>@news.NewsDate</span>
+                                </div>
+                                <div class="ho-ev-link">
+                                    <a>
+                                        <h4>@news.NewsTitle</h4>
+                                    </a>
+                                    <p>@news.NewsDescription</p>
+                                        <span>@DateTime.Now.ToString("HH:mm tt")</span>
+                                </div>
+                            </li>
+                            }
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="bot-gal h-vid ho-event-mob-bot-sp">
+                    <h4 class="text2">قسم الفيديو</h4>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3nYaYADmERk?si=UyPVjrL1knZh0oa7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                    
+                    <h5>كلمة الأستاذ الدكتور/  عصام علي أمين , عميد الكلية</h5>
+                    <p>
+                        وبديهي أن تملى علينا هذه الريادة من خلال تفرد كلية الدراســـــات العليا للبحوث
+                        الإحصائية بمنح دبلوم الدراسات العليا في الإحصاء وعلوم الحاسب منذ بداية نشأتها
+                        ولأكثر من سبعين عاماً مسئولية الاستمرار ومواكبة التقدم العلمي وبصفة خاصة تكنولوجيا
+                        المعلومات وطرق التعليم والتعلم التي أضفت لعلوم الإحصاء وجهاً جديداً.
+                        ويمثل هذا التفرد وذلك التميز للكلية الاقبال المتزايد من خريجي الكليات والمعاهد
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

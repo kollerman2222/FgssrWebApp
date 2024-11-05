@@ -1,0 +1,474 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <style>
+        .row{
+            direction:rtl;
+        }
+
+        .changecolor:hover{
+            color: #e66030 !important;
+        }
+
+        .dropdownn {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdownn-content {
+            visibility: hidden; /* Start with hidden visibility */
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            opacity: 0; 
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; 
+            transform: translateY(-10px); 
+        }
+
+        .subdropdownn-content {
+            visibility: hidden; /* Start with hidden visibility */
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 165px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+           /* left: 0;  Align to the left */
+            opacity: 0;
+            transform: translateX(-90%); /* Shift to the left of the parent -100% without animation  and    -90% for animation to start with*/
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; /* Transition effect */
+        }
+
+
+        .dropdownn-content a {
+            text-align:center !important;
+            width: 100%;
+            display: block;
+            padding: 15px !important;
+            line-height: normal !important;
+            font-weight:500 !important;
+        }
+            
+        .subdropdownn-content a {
+            text-align: center !important;
+            width: 100%;
+            display: block;
+            padding: 15px !important;
+            line-height: normal !important;
+            font-weight: 500 !important;
+        }
+
+        .dropdownn:hover .dropdownn-content {
+            visibility: visible; /* Make visible */
+            opacity: 1; /* Fade in */
+            transform: translateY(0); /* Move to original position */
+        }
+
+        .showsub:hover .subdropdownn-content {
+            visibility: visible; /* Make visible */
+            opacity: 1; /* Fade in */
+            transform: translateX(-100%); /* Move to the left of the parent */
+        }
+
+        .angledown{
+            font-size:14px !important;
+        }
+
+        .showsub {
+            position: relative;
+        }
+
+        .showsub .subdropdownn-content {
+            top: 0;
+        }
+    </style>
+
+
+
+    <title>كليه الدراسات العليا للبحوث الاحصائية</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="words about college">
+    <meta name="keyword" content="college, university, fgssr, faculty of gradutate, faculty of graduate studies, faculty of graduate studies for statistical research, diploma, professional, academy, academic, professional diploma, academic diploma">
+    <link rel="shortcut icon" href="~/images/fgssricon.webp" type="image/x-icon">
+
+
+
+    <link rel="stylesheet" href="~/template/cssRTL/font-awesomeRTL.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/materializeRTL.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/bootstrapRTL.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/bootstrappluginRTL.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/styleRTL.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/cssRTL/style1RTL.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/template/themifyicons/themify-icons.css" asp-append-version="true" />
+    <link href="~/chat/chatcss.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="~/template/cssRTL/style-mobRTL.css" asp-append-version="true">
+
+
+</head>
+
+<body>
+
+    <!-- MOBILE MENU -->
+    <section>
+        <div class="ed-mob-menu">
+            <div class="ed-mob-menu-con">
+                <div class="ed-mm-left">
+                    <div class="wed-logo">
+                        <a href="index-2.html">
+                            <img src="~/images/fgssrlogo.webp" alt="" asp-append-version="true" />
+                        </a>
+                    </div>
+                </div>
+                <div class="ed-mm-right">
+                    <div class="ed-mm-menu">
+                        <a href="#!" class="ed-micon"><i class="fa fa-bars"></i></a>
+                        <div class="ed-mm-inn">
+                            <a href="#!" class="ed-mi-close"><i class="fa fa-times"></i></a>
+                            <ul>
+                                <li>
+                                    <a asp-action="Homepage" asp-controller="Home">الرئيسيه</a>
+                                </li>
+                                <li class="about-menu">
+                                    <a asp-action="AboutUs" asp-controller="Home" class="mm-arr">من نحن</a>
+                                    
+                                </li>
+                                <li class="admi-menu">
+                                    <a asp-action="HowToApply" asp-controller="Home">التقديم و الفبول</a>
+                                   
+                                </li>
+                                <li><a asp-action="Departments" asp-controller="Home">البرامج الدراسيه</a></li>
+                                <li>
+                                    <a asp-action="Events" asp-controller="Home">المؤتمرات</a>
+                                </li>
+                                <li>
+                                    <a asp-action="Staff" asp-controller="Home">أعضاء التدريس</a>
+                                </li>
+                                <li>
+                                    <a asp-action="News" asp-controller="Home">الأخبار</a>
+                                </li>
+                                <partial name="_LoginPartial" />
+                                
+                             
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <section>
+        <div class="ed-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ed-com-t1-left">
+                            <ul>
+                                <li>
+                                    <a href="">كليه الدراسات العليا للبحوث الاحصائية</a>
+                                </li>
+                                <li>
+                                    <a href="">شؤون الطلبه : 33358496 20+ </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div id="alertmessage">
+          
+            </div>
+        }
+        @* <div class="top-logo" data-spy="affix" data-offset-top="250">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="wed-logo">
+                            <a asp-action="Homepage" asp-controller="Home">
+                                <img src="~/images/fgssrlogo.webp" alt="" asp-append-version="true" />
+                            </a>
+                        </div>
+                        <div class="main-menu">
+                            <ul>
+                                <li>
+                                    <a asp-action="Homepage" asp-controller="Home">الرئيسية</a>
+                                </li>
+                                <li class="about-menu">
+                                    <a asp-action="AboutUs" asp-controller="Home" class="mm-arr">عن الكلية</a>
+                                </li>
+                                <li class="admi-menu">
+                                    <a asp-action="HowToApply" asp-controller="Home">التقديم و القبول</a>
+                                </li>
+                                <li><a asp-action="Departments" asp-controller="Home">البرامج الدراسية</a></li>
+                                <li>
+                                    <a asp-action="Events" asp-controller="Home">المؤتمرات</a>
+                                </li>
+                                <li>
+                                    <a asp-action="Staff" asp-controller="Home">أعضاء التدريس</a>
+                                </li>
+                                <li>
+                                </li>
+                                <li>
+                                    <a asp-action="News" asp-controller="Home">الأخبار</a>
+                                </li>
+                                <partial name="_LoginPartial" />
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div> *@
+        <div class="top-logo" data-spy="affix" data-offset-top="250">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="wed-logo">
+                            <a asp-action="Homepage" asp-controller="Home">
+                                <img src="~/images/fgssrlogo.webp" alt="" asp-append-version="true" />
+                            </a>
+                        </div>
+                        <div class="main-menu-new">
+                          
+                                        <form asp-action="Diplomas" asp-controller="Home" method="get">
+                                            <div class="sf-type">
+                                                <div class="sf-input">
+                                                    <input type="text" id="sf-box" name="query" placeholder="اسم البرنامج">
+                                                </div>
+                                            </div>
+                                            <div class="sf-submit">
+                                                <input type="submit" value="البحث عن برنامج دراسي">
+                                            </div>
+                                        </form>
+                           
+                        </div>
+                        <div class="main-menu">
+                            <ul>
+                                <li>
+                                    <a asp-action="Homepage" asp-controller="Home">الرئيسية</a>
+                                </li>
+                                <li class="dropdownn">
+                                    <a href="" class="mm-arr">عن الكلية<i class="ti-angle-down angledown"></i></a>
+                                    <div class="dropdownn-content">
+                                        <a asp-action="CollegeDefinition" asp-controller="Home">تعريف الكلية</a>
+                                        <a asp-action="CollegeAdministrators" asp-controller="Home">ادارة الكلية</a>
+                                        <a asp-action="Staff" asp-controller="Home">أعضاء التدريس</a>
+                                        <a asp-action="PreviousCollegeAdministrators" asp-controller="Home">الادارة السابقة  للكلية</a>
+                                        <a asp-action="News" asp-controller="Home">الأخبار</a>
+                                        <a asp-action="CollegeMap" asp-controller="Home">خريطة الكلية</a>
+                                        <div class="showsub">
+                                            <a href="">تميز الكلية<i class="ti-angle-left angledown"></i></a>
+                                            <div class="subdropdownn-content">
+                                                <a asp-action="CollegeDistinctive" asp-controller="Home">ملامح تميز الكلية</a>
+                                                <a asp-action="HonoredStaff" asp-controller="Home">أعضاء هية التدريس المكرمون من الدولة</a>
+                                                <a asp-action="TopRasayel" asp-controller="Home">أفضل رسائل ماجستير و دكتوراة</a>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0)">وحدة الجودة</a>
+                                    </div>
+                                </li>
+                                <li class="admi-menu">
+                                    <a asp-action="HowToApply" asp-controller="Home">التقديم و القبول</a>
+                                </li>
+                                <li><a asp-action="Departments" asp-controller="Home">البرامج الدراسية</a></li>
+
+                                <li class="dropdownn">
+                                    <a>البحث العلمي<i class="ti-angle-down angledown"></i></a>
+                                    <div class="dropdownn-content">
+                                        <a href="javascript:void(0)">المكتبة الرقمية للمجلس الأعلى للجامعات</a>
+                                        <a asp-action="PublishedResearchGuide" asp-controller="Home">دليل الأبحاث المنشورة</a>
+                                        <a asp-action="Researchplans" asp-controller="Home">الخطط البحثية</a>
+                                        <a asp-action="PublishMagazine" asp-controller="Home">كيف تنشر في أول مجلة دولية لجامعة القاهرة في الإنسانيات والعلوم الاجتماعية التطبيقية</a>
+                                        <a href="javascript:void(0)">مفكرة بحثية</a>
+                                    </div>
+                                </li>
+                                <li class="dropdownn">
+                                    <a>خدمات الكلية للمجتمع<i class="ti-angle-down angledown"></i></a>
+                                    <div class="dropdownn-content">
+                                        <a asp-action="CollegeLibrary" asp-controller="Home">مكتبة الكلية</a>
+                                        <a asp-action="CommunityService" asp-controller="Home">قطاع خدمة المجتمع</a>
+                                        <a asp-action="TrainingProgram" asp-controller="Home">البرنامج التدريبى</a>
+                                        <div class="showsub">
+                                            <a href="">مراكز ووحدات الكلية<i class="ti-angle-left angledown"></i></a>
+                                            <div class="subdropdownn-content">
+                                                <a asp-action="CrisisManagment" asp-controller="Home">وحدة ادارة الازمات والكوارث</a>
+                                                <a asp-action="InformaticsCenter" asp-controller="Home">مركز البرمجيات والاستشارات المعلوماتية</a>
+                                                <a asp-action="DemographicCenter" asp-controller="Home">مركز التطبيقات الديموجرافية</a>
+                                                <a asp-action="ConsultingCenter" asp-controller="Home">مركز الاستشارات الاحصائية والقياسية</a>
+                                            </div>
+                                        </div>
+                                        <a asp-action="CollegeConference" asp-controller="Home">مؤتمر الكلية</a>
+                                        <a asp-action="Events" asp-controller="Home">المؤتمرات</a>
+                                        <div class="showsub">
+                                            <a href="">مطبوعات الكلية<i class="ti-angle-left angledown"></i></a>
+                                            <div class="subdropdownn-content">
+                                                <a href="">النشرة</a>
+                                                <a asp-action="CollegeRelease" asp-controller="Home">الاصدارات</a>
+                                                <a asp-action="CollegeMagazine" asp-controller="Home">مجلة الكلية</a>
+                                            </div>
+                                        </div>
+                                        <a asp-action="CollegeDealing" asp-controller="Home">مواثيق التعامل داخل الجامعة</a>
+                                    </div>
+                                </li>
+                              @*   <li class="dropdownn">
+                                    <a>مكتبة الكلية<i class="ti-angle-down angledown"></i></a>
+                                    <div class="dropdownn-content">
+                                        <a href="">تعريف المكتبة</a>
+                                        <a href="">رسالة المكتبة</a>
+                                        <a href="">مواعيد المكتبة</a>
+                                        <a href="">البحث داخل المكتبة</a>
+                                        <a href="">امتحانات الكلية</a>
+                                    </div>
+                                </li> *@
+                                <li class="dropdownn">
+                                    <a>المجلات العلمية<i class="ti-angle-down angledown"></i></a>
+                                    <div class="dropdownn-content">
+                                        <a asp-action="EgyptianMagazine" asp-controller="Home">المجلة المصرية للسكان وتنظيم الاسرة</a>
+                                        <a asp-action="EgyptianStatisticalMagazine" asp-controller="Home">المجلة الاحصائية المصرية</a>
+                                        <a asp-action="EgyptianComputerMagazine" asp-controller="Home">The Egyptian Computer Journal</a>
+                                    </div>
+                                </li>
+                               @*  <li>
+                                    <a asp-action="Events" asp-controller="Home">المؤتمرات</a>
+                                </li> *@
+                                @* <li>
+                                    <a asp-action="Staff" asp-controller="Home">أعضاء التدريس</a>
+                                </li> *@
+                                <li>
+                                </li>
+                               @*  <li>
+                                    <a asp-action="News" asp-controller="Home">الأخبار</a>
+                                </li> *@
+                                <partial name="_LoginPartial" />
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="search-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                   @*      <div class="search-form">
+                            <form asp-action="Diplomas" asp-controller="Home" method="get">
+                                <div class="sf-type">
+                                    <div class="sf-input">
+                                        <input type="text" id="sf-box" name="query" placeholder="اسم البرنامج">
+                                    </div>
+                                </div>
+                                <div class="sf-submit">
+                                    <input type="submit" value="البحث عن برنامج دراسي">
+                                </div>
+                            </form>
+                        </div> *@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+ 
+   
+
+    @RenderBody()
+
+    <section>
+        <div class="full-bot-book">
+            <div class="container">
+                <div class="row">
+                    <div class="bot-book">
+                        <div class="col-md-2 bb-img">
+                            <img src="~/images/3.webp" alt="" asp-append-version="true" />
+                            
+                        </div>
+                        <div class="col-md-7 bb-text">
+                            <h4>التعلم  و التطوير يكون في اي وقت ابدء الان !</h4>
+                            <p>
+                                لدينا برامج مختلفة مع عدة دبلومات مختلفة لكل برنامج.
+
+                            </p>
+                        </div>
+                        <div class="col-md-3 bb-link">
+                            <a asp-controller="Home" asp-action="Departments">البرامج المتاحة</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <partial name="_chatpop" />
+    <section class="wed-hom-footer">
+        <div class="container">
+            <div class="row wed-foot-link">
+                <div class="col-md-4 foot-tc-mar-t-o">
+                    <h4>أشهر البرامج</h4>
+                    <ul>
+                        <li><a href=""> هندسة البرمجيات</a></li>
+                        <li><a href="">إحصائيات</a></li>
+                        <li><a href="">علوم الحاسب </a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>أشهر البرامج</h4>
+                   
+                        <ul>
+                            <li><a href=""> هندسة البرمجيات</a></li>
+                            <li><a href="">إحصائيات</a></li>
+                            <li><a href="">علوم الحاسب </a></li>
+                        </ul>
+                    
+                </div>
+                <div class="col-md-4">
+                    <h4>المساعده</h4>
+                    <ul>
+                        <li><a href="">مساعدة مباشرة على مدار 24 ساعة </a> </li>
+                        <li><a href="">تعليق</a> </li>
+                        <li><a href="">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row wed-foot-link-1">
+                <div class="col-md-4 foot-tc-mar-t-o">
+                    <h4>تواصل معنا</h4>
+                    <p>العنوان:  5 أحمد زويل، الدقي، محافظة الجيزة 3750210</p>
+                    <p> 02 33358496  :رقم الهاتف</p>
+                    <p>fgssr_dean@cu.edu.eg  :الايميل </p>
+                </div>
+            
+            </div>
+        </div>
+    </section>
+
+  
+
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+        @*<script src="~/template/js/alert.js" asp-append-version="true"></script>*@ @*for alert messages *@
+    <script src="~/template/js/main.min.js" asp-append-version="true"></script>
+    <script src="~/template/js/bootstrap.min.js" asp-append-version="true"></script>
+@*     <script src="~/template/js/materialize.min.js" asp-append-version="true"></script>
+ *@ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script src="~/template/js/custom.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+</body>
+
+</html>

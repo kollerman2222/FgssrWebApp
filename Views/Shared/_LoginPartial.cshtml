@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    @if (User.IsInRole("Admin"))
+    {
+        <li>
+            <a asp-action="Dashboard" asp-controller="Home" class="underline dashboardbtn">لوحه التحكم</a>
+    </li>
+    }
+    @* 
+        <li>
+            <a href="/account/profile" class="underline loginbtn">الحساب الشخصي</a>
+        </li>
+        <li>
+        <form id="logoutform" asp-area="Identity" asp-page="/account/logout">
+            <a  class="underline logoutbtn" onclick="document.getElementById('logoutform').submit();">تسجيل الخروج </a>
+            </form>
+
+      </li> *@
+
+
+
+
+    <li class="dropdownn">
+        <a class="underline loginbtn">الحساب الشخصي<i class="ti-angle-down"></i></a>
+        <div class="dropdownn-content">
+            <a href="/account/profile" class="underline"><i class="ti-user"></i> حسابك</a>
+            <form id="logoutform" asp-area="Identity" asp-page="/account/logout">
+                <a class="underline changecolor" onclick="document.getElementById('logoutform').submit();"> <i class="ti-lock"></i> تسجيل الخروج </a>
+            </form>
+        </div>
+    </li>
+
+
+
+
+
+
+
+}
+else
+{
+        <li>
+            <a href="/account/login" class="underline loginbtn">تسجيل الدخول</a>
+        </li>
+        <li>
+            <a href="/account/register" class="underline registerbtn">حساب جديد</a>
+        </li>
+
+}
+

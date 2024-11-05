@@ -1,0 +1,65 @@
+﻿@model IEnumerable<NewsViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_DashboardLayout";
+}
+
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>جميع الاخبار</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>عنوان الخبر</th>
+                                    <th>الوصف</th>
+                                    <th>التاريخ</th>
+                                    <th>تعديل خبر</th>
+                                    <th>حذف خبر</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a><span class="list-enq-name">@item.NewsTitle</span></a>
+                                        </td>
+                                        @if(item.NewsDescription.Length < 40 )
+                                            {
+                                            <td>@item.NewsDescription........ </td>
+
+                                        }
+                                        else
+                                        {
+                                          <td>@item.NewsDescription.Substring(0,40) ........ </td> 
+                                        }
+                                        <td>@item.NewsDate</td>
+                                        
+                                        <td><a asp-action="Edit" asp-controller="News" asp-route-id="@item.NId" class="ad-st-view-edit">تعديل</a></td>
+
+                                        <td><a asp-action="Delete" asp-controller="News" asp-route-id="@item.NId" id="buttonlink" class="ad-st-view-delete DeleteSubmitbutton">حذف</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    
+}

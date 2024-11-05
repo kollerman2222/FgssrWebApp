@@ -1,0 +1,63 @@
+﻿@model NewsViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_DashboardLayout";
+}
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp admin-form">
+                <div class="inn-title">
+                    <h4>تعديل خبر</h4>
+                </div>
+                <div class="tab-inn">
+                    <form class="form" method="post" asp-action="Edit">
+                        <input hidden asp-for="NId" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">عنوان الخبر</span>
+                                    <input asp-for="NewsTitle" type="text">
+                                    <span asp-validation-for="NewsTitle" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">التاريخ</span>
+                                    <input asp-for="NewsDate" type="text">
+                                    <span asp-validation-for="NewsDate" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">الوصف</span>
+                                <textarea asp-for="NewsDescription" type="text"></textarea>
+                                <span asp-validation-for="NewsDescription" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="waves-effect waves-light btn-large waves-input-wrapper"><input type="submit" class="waves-button-input EditSubmitbutton" value="حفظ التعديلات"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}

@@ -1,0 +1,58 @@
+﻿@model StaffViewModel
+
+
+<style>
+    .textsize{
+
+        font-size:25px !important;
+    }
+</style>
+
+<section class="page-title-section overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary">أعضاء هيئه التدريس</a></li>
+                    <li class="list-inline-item text-white h3 font-secondary nasted">@Model.StaffName</li>
+                </ul>
+                <p class="text-lighten">اعضاء هيئه التدريس مصدر الخبرة والتميز الذي يشكل ركيزة أساسية لتجربة التعلم الفريدة في كليتنا.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mb-5">
+                <img class="img-fluid w-100" src="~/uploads/staff/@Model.StaffImageName" alt="teacher" width="445" height="501" asp-append-version="true" >
+            </div>
+            <div class="col-md-6 mb-5">
+                <h3>د/ @Model.StaffName</h3>
+                <h6 class="text-color mb-5">@Model.StaffPosition</h6>
+                <div class="row">
+                    <div class="col-md-6 mb-5 mb-md-0">
+                        <h4 class="mb-4 textsize">التواصل:</h4>
+                        <ul class="list-unstyled mb-5">
+                            <li class="mb-3">@Model.Email</li>       
+                        </ul>
+                        <h4 class="mb-4 textsize"> الأنشطة و الاهتمامات</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">Computer Networking</li>
+                            <li class="mb-3">Computer Security</li>
+                            <li class="mb-3">Human Computer Interfacing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <h4 class="mb-4 textsize">السيره الذاتيه</h4>
+                <p class="mb-5">
+                  @Model.Biograpghy
+                </p>
+            </div>
+        </div>
+        
+    </div>
+</section>

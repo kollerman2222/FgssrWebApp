@@ -1,0 +1,68 @@
+﻿@model AdmissionViewModel
+
+@{
+    Layout = "_DashboardLayout";
+}
+
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>طلبات التقديم المعلقه</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>رقم الطلب</th>
+                                    <th>الصوره</th>
+                                    <th>الاسم</th>
+                                    <th>الموبيل</th>
+                                    <th>الايميل</th>
+                                    <th>تاريخ الميلاد</th>
+                                    <th>الدبلومه</th>
+                                    <th>حاله الطلب</th>
+                                    <th>تعديل حاله الطلب</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model.UsersList.Where(x=>x.ApplicationStatus!=null && x.ApplicationStatus == "Pending"))
+                                {
+                                    <tr>
+                                        <td>@user.AdmissionNumber</td>
+
+                                        <td>
+                                        @if (user.ProfileImage == null)
+                                        {
+                                            <span class="list-img"><img src="~/uploads/users/defaultuserimage.png" alt="" asp-append-version="true" ></span>
+
+                                        }
+                                        else
+                                        {
+                                            <span class="list-img"><img src="~/uploads/users/@user.ProfileImage" alt="" asp-append-version="true" ></span>
+
+                                        }
+                                        </td>
+                                        <td>@user.FullNameEnglish</td>
+                                        <td>@user.PhoneNumber</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.BirthDate</td>
+                                        <td>@user.Section?.SectionName</td>
+                                        <td><span class="label label-success">@user.ApplicationStatus</span></td>
+                                        <td><a asp-action="Enquiry" asp-controller="Users" asp-route-userId="@user.Id" class="ad-st-view-edit">Edit</a></td>
+@*                                         <td><a asp-action="PrivateMessage" asp-controller="Users" asp-route-userId="@user.Id" class="ad-st-view-edit">Edit</a></td>
+ *@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

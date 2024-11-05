@@ -1,0 +1,287 @@
+﻿@model DashboardViewModel
+@{
+    Layout = "_DashboardLayout";
+}
+
+<div class="sb2-2-1">
+    <h2>لوحه التحكم</h2>
+    <div class="db-2">
+        <ul>
+            <li>
+                <div class="dash-book dash-b-1">
+                    <h5>البرامج الدراسيه</h5>
+                    <h4>@Model.Sections.Count()</h4>
+@*                     <a asp-action="Index" asp-controller="Sections">إظهار المزيد</a>
+ *@                </div>
+            </li>
+            <li>
+                <div class="dash-book dash-b-2">
+                    <h5>أعضاء التدريس</h5>
+                    <h4>@Model.Staff.Count()</h4>
+@*                     <a asp-action="Index" asp-controller="Staffs">إظهار المزيد</a>
+ *@                </div>
+            </li>
+            <li>
+                <div class="dash-book dash-b-3">
+                    <h5>المستخدمين</h5>
+                    <h4>@Model.Users.Count()</h4>
+@*                     <a asp-action="Index" asp-controller="Users">إظهار المزيد</a>
+ *@                </div>
+            </li>
+            <li>
+                <div class="dash-book dash-b-4">
+                    <h5>الطلبات المعلقه</h5>
+                    <h4>@Model.Users.Where(x=>x.ApplicationStatus=="Pending").Count()</h4>
+@*                     <a asp-action="GetPendingEnquiry" asp-controller="Users">إظهار المزيد</a>
+ *@                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>أحدث المستخدمين</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الصوره</th>
+                                    <th>الاسم</th>
+                                    <th>الموبيل</th>
+                                    <th>الايميل</th>
+                                    <th>تاريخ الميلاد</th>
+                                    <th>الدبلومه</th>
+                                    <th>حاله الطلب</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var user in Model.Users.TakeLast(5))
+                                {
+                                    <tr>
+                                        <td>
+                                            @if (user.ProfileImage == null)
+                                            {
+                                                <span class="list-img"><img src="~/uploads/users/defaultuserimage.webp" alt="" asp-append-version="true" ></span>
+
+                                            }
+                                            else
+                                            {
+                                                <span class="list-img"><img src="~/uploads/users/@user.ProfileImage" alt="" asp-append-version="true" ></span>
+
+                                            }
+                                        </td>
+                                        <td>@user.FullNameEnglish</td>
+                                    <td>@user.PhoneNumber</td>
+                                    <td>@user.Email</td>
+                                    <td>@user.BirthDate</td>
+                                    <td>@user.Section?.SectionName</td>
+                                    <td><span class="label label-success">@user.ApplicationStatus</span></td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>أحدث البرامج الدراسيه</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الصوره</th>
+                                    <th>اسم الدبلومه</th>
+                                    <th>القسم</th>
+                                    <th>الوصف</th>
+                                    <th>عدد الطلاب</th>
+                                    <th>النشاط</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var dip in Model.Sections.TakeLast(5).OrderByDescending(s=>s.SectionId))
+                                {
+                                <tr>
+                                    <td><span class="list-img"><img src="~/uploads/sections/@dip.SectionImage" asp-append-version="true" /></span></td>
+                                    <td>@dip.SectionName</td>
+                                    <td>@dip.Department?.DepartmentName</td>
+                                        @if (dip.Description?.Length < 30)
+                                        {
+                                            <td>@dip.Description? ...</td>
+
+                                        }
+                                        else
+                                        {
+                                           <td>@dip.Description?.Substring(0,30)...</td>
+
+                                        }
+                                    <td>@dip.Users.Count()</td>
+                                    <td><span class="label label-success">@(dip.isActive ? "Avaliable":"Not Avaliable")</span></td>
+                                </tr>
+                                }
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>أحدث المؤتمرات</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الاسم</th>
+                                    <th>الوصف</th>
+                                    <th>الشهر</th>
+                                    <th>الوقت</th>
+                                    <th>المكان</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var eve in Model.Events.TakeLast(3).OrderByDescending(e=>e.EventId))
+                                {
+                                    <tr>
+                                    <td><span class="txt-dark weight-500">@eve.EventTitle</span> </td>
+                                        @if (eve.EventDescription.Length < 30)
+                                        {
+                                            <td>@eve.EventDescription</td>
+
+                                        }
+                                        else
+                                        {
+                                            <td>@eve.EventDescription.Substring(0, 30)...</td>
+
+                                        }
+                                    <td>@eve.DateDay , @eve.DateMonth</td>
+                                    <td>@eve.Time PM</td>
+                                    <td>@eve.EventLocation</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>أحدث الأخبار</h4>
+                    <p>Education is about teaching, learning skills and knowledge.</p>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الاسم</th>
+                                    <th>الوصف</th>
+                                    <th>تاريخ الإنشاء</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var news in Model.News.TakeLast(3).OrderByDescending(n => n.NewsId))
+                                {
+                                    <tr>
+                                    <td><span class="txt-dark weight-500">@news.NewsTitle</span> </td>
+                                        @if (news.NewsDescription.Length < 30)
+                                        {
+                                            <td>@news.NewsDescription...</td>
+
+                                        }
+                                        else
+                                        {
+                                          <td>@news.NewsDescription.Substring(0, 30)...</td>
+
+                                        }
+                                    <td>@news.NewsDate</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>أحدث أعضاء التدريس</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الصوره</th>
+                                    <th>الاسم</th>
+                                    <th>المنصب</th>
+                                    <th>سيرة شخصية</th>
+                                    <th>الايميل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var staff in Model.Staff.TakeLast(5).OrderByDescending(s => s.StaffId))
+                                {
+                                    <tr>
+                                    <td><span class="list-img"><img src="~/uploads/staff/@staff.StaffImage" asp-append-version="true" ></span></td>
+                                        <td> <span class="list-enq-name">د/ @staff.StaffName</span></td>
+                                    <td>@staff.StaffPosition</td>
+                                        @if (staff.Biograpghy.Length < 30)
+                                        {
+                                            <td>@staff.Biograpghy</td>
+
+                                        }
+                                        else
+                                        {
+                                            <td>@staff.Biograpghy.Substring(0, 30)...</td>
+
+                                        }
+                                    <td>@staff.Email</td>
+                                </tr>
+                                }
+                                
+                             
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

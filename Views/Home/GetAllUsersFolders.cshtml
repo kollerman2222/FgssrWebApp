@@ -1,0 +1,61 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "UsersFolders";
+    Layout = "_DashboardLayout";
+
+}
+
+<style>
+
+    .card{
+        width: 200px; 
+        text-align:center;
+        background-color: #FFC442 !important;
+        color:black;
+    }
+
+    .card:hover{
+            background-color: white !important;
+        }
+
+        .h6:hover{
+        color: black !important;
+        }
+</style>
+
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>جميع ملفات المستخدمين</h4>
+                </div>
+                <div class="tab-inn">
+
+                    <div class="row">
+                        @foreach (var folder in Model)
+                        {
+
+                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                <div class="card-body card border-0 rounded-0 hover-shadow">
+
+                                    <a class="h6" asp-action="specificUserFolder" asp-route-userNationalId="@folder">@folder</a>
+
+                                    </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+  
+
+

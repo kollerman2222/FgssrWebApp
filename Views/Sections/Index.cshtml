@@ -1,0 +1,105 @@
+﻿@model IEnumerable<DiplomasSectionsViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_DashboardLayout";
+    
+}
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>جميع البرامج الدراسيه</h4>
+                </div>
+                <div class="tab-inn">
+                    <div class="table-responsive table-desi">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>الصوره</th>
+                                    <th>اسم البرنامج الدراسي</th>
+                                    <th>البرنامج</th>
+                                    <th>الوصف</th>
+                                    <th>النشاط</th>
+                                    <th>تعديل </th>
+                                    <th>حذف </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span class="list-img"><img src="~/uploads/sections/@item.SectionImage" alt="" asp-append-version="true" ></span> 
+                                        </td>
+                                        <td>
+                                            <a><span class="list-enq-name">@item.SectionName</span></a>
+                                        </td>
+                                        <td>@item.Department?.DepartmentName</td> 
+                                        @if (item.Description?.Length < 50)
+                                        {
+                                            <td>@item.Description? ....</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@item.Description?.Substring(0, 50) ....</td>
+
+                                        }
+                                        <td>@Html.Raw(item.isActive ? "<span class='ad-st-view-edit'>Avaliable</span>" : "<span class='ad-st-view-edit'>Not Avaliable</span>")</td>
+                                        <td><a asp-action="Edit" asp-controller="Sections" asp-route-id="@item.SecId" class="ad-st-view-edit">تعديل</a></td>
+                                        <td><a asp-action="Delete" asp-controller="Sections" asp-route-id="@item.SecId" class="ad-st-view-delete DeleteSubmitbutton">حذف</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('.DeleteSubmitbutton').on('click', function (event) {
+                event.preventDefault();
+                var deleteUrl = $(this).attr('href');
+                Swal.fire({
+                    title: "هل تريد القيام بالحذف ؟",
+                    icon: "warning",
+                    iconHtml: "!",
+                    confirmButtonText: "نعم",
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "لا",
+                    showCancelButton: true,
+                    showCloseButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: deleteUrl,
+                            type: 'GET',
+                            success: function (response) {
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: response.deleteMessage,
+                                    showConfirmButton: false,
+                                    timer: 1700
+                                }).then(() => {
+                                    window.location.href = '/Sections/Index?departmentSearch=' + response.departmentSearch;
+                                });
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('Error occurred:', error);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

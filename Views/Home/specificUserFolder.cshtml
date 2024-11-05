@@ -1,0 +1,110 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "specificUserFolder";
+    Layout = "_DashboardLayout";
+
+    var folderName = ViewBag.UserFolderName;
+}
+
+
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp">
+                <div class="inn-title">
+                    <h4>ملفات المستخدم @folderName</h4>
+                </div>
+                <div class="tab-inn">
+
+                    <div class="row">
+                        @foreach (var file in Model)
+                        {
+                            var filePath = Url.Content("~/uploads/gradcerts/" + folderName + "/" + file);
+
+                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <div class="card border-0 rounded-0 hover-shadow">
+                                            @if (file.EndsWith(".pdf"))
+                                            {
+                                                <a href="@filePath" target="_blank">
+                                                    <div class="card-img position-relative">
+                                                        <img class="card-img-top rounded-0" src="~/images/pdfimage.png" alt="Image" width="250" height="229" asp-append-version="true">
+                                                    </div>
+                                                   @*  <div class="card-body">
+
+                                                        <p> adadadada</p>
+
+                                                    </div> *@
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <div class="card-img position-relative">
+                                                    <img class="card-img-top rounded-0" src="@filePath" alt="Image" width="250" height="229" asp-append-version="true">
+                                                </div>
+                                                @* <div class="card-body">
+
+
+                                                </div> *@
+                                            }
+                                    </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    @* <div class="sb2-2-3">
+            <div class="row">
+                      <div class="box-inn-sp">
+                            <div class="inn-title">
+                                <h4>جميع ملفات المستخدمين</h4>
+                            </div>
+                            @foreach (var file in Model)
+                            {
+                                var filePath = Url.Content("~/uploads/gradcerts/" + folderName + "/" + file);
+
+                                <div class="col-lg-2 col-sm-6 mb-5">
+                                    <div class="card border-0 rounded-0 hover-shadow">
+                                        @if (file.EndsWith(".pdf"))
+                                        {
+
+                                            <a href="@filePath" target="_blank">
+                                                <div class="card-img position-relative">
+                                                    <img class="card-img-top rounded-0" src="~/images/pdfimage.png" alt="Image" width="250" height="229" asp-append-version="true">
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <a asp-controller="Home" asp-action="eventdetails" class="btn btn-primary btn-sm">تحميل</a>
+
+                                                </div>
+                                            </a>
+
+                                           
+                                        }
+                                        else
+                                        {
+                                            <div class="card-img position-relative">
+                                                <img class="card-img-top rounded-0" src="@filePath" alt="Image" width="250" height="229" asp-append-version="true">
+                                            </div>
+                                            <div class="card-body">
+
+                                                <a asp-controller="Home" asp-action="eventdetails" class="btn btn-primary btn-sm">تحميل</a>
+
+                                            </div>
+                                        }
+
+
+                                    </div>
+                                </div>
+                            }
+                      </div>
+            </div>
+    </div> *@
+
+
+

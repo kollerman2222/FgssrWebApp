@@ -1,0 +1,28 @@
+﻿@model UsersViewModel
+
+
+
+
+<table class="table table-striped mt-4">
+    <input type="hidden" asp-for="UserId" />
+
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>FullNameEnglish</th>
+            <th>Birth date</th>
+            <th>Email</th>
+            <th>phonenumber</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                 <td>@Model.FullNameEnglish</td>
+                 <td>@Model.BirthDate</td>
+                 <td>@Model.Email</td>
+                 <td>@Model.PhoneNumber</td>
+           
+            </tr>
+
+    </tbody>
+</table>

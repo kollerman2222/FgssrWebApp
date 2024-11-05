@@ -1,0 +1,84 @@
+﻿@model StaffViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_DashboardLayout";
+
+}
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp admin-form">
+                <div class="inn-title">
+                    <h4>إضافه عضو تدريس جديد</h4>
+                </div>
+                <div class="tab-inn">
+                    <form method="post" asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">الاسم</span>
+                                    <input asp-for="StaffName" type="text">
+                                    <span asp-validation-for="StaffName" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">المنصب</span>
+                                <input asp-for="StaffPosition" type="text">
+                                <span asp-validation-for="StaffPosition" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">الايميل</span>
+                                <input asp-for="Email" type="text">
+                                <span asp-validation-for="Email" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">سيرة شخصية</span>
+                                <textarea rows="6" asp-for="Biograpghy" type="text"></textarea>
+                                <span asp-validation-for="Biograpghy" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="file-field input-field col s12">
+                                <div class="btn admin-upload-btn">
+                                    <span class="textsizespan">رفع صوره</span>
+                                    <input type="file" asp-for="CreateStaffImage" data-rule-extension="jpg,png,jpeg" data-msg-extension="Only JPG , PNG , JPEG are allowed" data-rule-filesize="1048576" data-msg-filesize="Max file size is 1 MB" />
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text" placeholder="">
+                                </div>
+                                <span asp-validation-for="CreateStaffImage" class="validationcolor"></span>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="waves-effect waves-light btn-large waves-input-wrapper"><input type="submit" class="waves-button-input" value="إضافه عضو"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $.validator.addMethod('filesize', function (value, element, params) {
+
+            return this.optional(element) || element.files[0].size <= params;
+        });
+    </script>
+
+}

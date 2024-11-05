@@ -1,0 +1,36 @@
+﻿@model IEnumerable<StaffViewModel>
+
+<section class="page-title-section overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline custom-breadcrumb">
+                    <li class="list-inline-item"><a class="h2 text-primary font-secondary">أعضاء هيئه التدريس</a></li>
+                </ul>
+                <p class="text-lighten">اعضاء هيئه التدريس مصدر الخبرة والتميز الذي يشكل ركيزة أساسية لتجربة التعلم الفريدة في كليتنا.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div data-ref="mixitup-target" class="container">
+        <div class="row" data-ref="mixitup-container">
+            @foreach(var item in Model)
+            {
+                <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law">
+                <div class="card border-0 rounded-0 hover-shadow">
+                    <img class="card-img-top rounded-0" src="~/uploads/staff/@item.StaffImageName" alt="teacher" width="355" height="400" asp-append-version="true" >
+                    <div class="card-body">
+                            <h4 class="card-title"> د/ @item.StaffName</h4>
+                        <p>@item.StaffPosition</p>
+                        <ul class="list-inline">
+                                <a asp-controller="Home" asp-action="staffdetails" asp-route-id="@item.StID" class="btn btn-primary btn-sm">عرض التفاصيل</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        </div>
+    </div>
+</section>

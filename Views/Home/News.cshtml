@@ -1,0 +1,53 @@
+﻿@model IEnumerable<NewsViewModel>
+
+@{
+    var date = DateTime.Now;
+}
+
+<style>
+    h4{
+        all: initial;
+        font-size:23px !important;
+        font-weight:400 !important;
+    }
+
+    .padding{
+        padding:20px 0px;
+    }
+
+</style>
+
+<section>
+    <div class="container com-sp">
+        <div class="row">
+            <div class="cor about-sp">
+                <div class="ed-about-tit">
+                    <div class="con-title">
+                        <h2>اخر <span> الأخبار</span></h2>
+                    </div>
+                    <div>
+                        <div class="ho-event pg-eve-main">
+                            <ul>
+                                @foreach(var news in Model)
+                                {
+                                    <li>
+                                    <div class="ho-ev-date padding pg-eve-date">
+                                        <span>@date.Day</span><span>@date.Month,@date.Year</span>
+                                    </div>
+                                    <div class="ho-ev-link pg-eve-desc">
+                                        <a>
+                                            <h4>@news.NewsTitle</h4>
+                                        </a>
+                                        <p>@news.NewsDescription</p>
+                                    </div>
+                                    
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

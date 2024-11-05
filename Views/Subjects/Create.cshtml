@@ -1,0 +1,136 @@
+﻿@model SubjectsViewModel
+
+@{
+    ViewData["Title"] = "Add Subject";
+    Layout = "_DashboardLayout";
+}
+<style>
+    select{
+
+        font-size:18px !important;
+    }
+
+</style>
+
+
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp admin-form">
+                <div class="inn-title">
+                    <h4>إضافه مقرر دراسي جديد</h4>
+                </div>
+                <div class="tab-inn">
+                    <form class="form" method="post" asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">اسم المقرر عربي</span>
+                                    <input asp-for="SubjectNameArabic" type="text">
+                                    <span asp-validation-for="SubjectNameArabic" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">اسم المقرر انجليزي</span>
+                                    <input asp-for="SubjectNameEnglish" type="text">
+                                    <span asp-validation-for="SubjectNameEnglish" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">كود المقرر</span>
+                                    <input asp-for="SubjectCode" type="text">
+                                    <span asp-validation-for="SubjectCode" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">عدد الساعات</span>
+                                    <input asp-for="SubjectHours" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">البرنامج </span>
+                                    <select asp-for="CasDepartmentId" asp-items="ViewBag.DepartmentList" class="browser-default dropppsize">
+                                        <option value="">--أختر البرنامج --</option>
+                                    </select>
+                                    <span asp-validation-for="CasDepartmentId" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">البرنامج الدراسي</span>
+                                    <select asp-for="CasSectionId" asp-items="@(new SelectList(Model.CasSections, "SectionId", "SectionName"))" class="browser-default dropppsize">
+                                        <option value="">--أختر البرنامج الدراسي--</option>
+                                    </select>                                   
+                                    <span asp-validation-for="CasSectionId" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">الدرجه العلميه</span>
+                                    <select class="browser-default"  asp-for="ScientificDegree">
+                                        <option value="" disabled selected>--أختر الدرجه العلميه--</option>
+                                        <option value="Diploma">Diploma</option>
+                                        <option value="Masters">Masters</option>
+                                        <option value="Doctors">Doctors</option>
+                                    </select>
+                                    <span asp-validation-for="ScientificDegree" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="waves-effect waves-light btn-large waves-input-wrapper"><input type="submit" class="waves-button-input CreateSubmitButton" value="إضافه المقرر الدراسي"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+            $('#CasDepartmentId').on('change', function () {
+                var depId = $(this).val();
+                $('#CasSectionId').empty();
+
+                $.ajax({
+                url: '/Subjects/GetSections?depId=' + depId,
+                type: 'GET',
+                success: function (result) {
+                    $.each(result , function(i , item){
+
+                        $('#CasSectionId').append($('<option></option>').attr('value', item.sectionId).text(item.sectionName));
+                    });
+                }
+                });
+            });
+    </script>
+
+
+
+
+}

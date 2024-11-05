@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "_PrintLayout";
+}
+
+ <style>
+        /* Set the body to fit an A4 page */
+        @@media print {
+            @@page {
+                size: A4; /* Set size to A4 for printing */
+                margin:0; /* Optional: Adjust margins */
+            }
+
+        .btn-print {
+            display: none; /* Hide the button */
+        }
+
+            body {
+                width: 210mm; /* Width of A4 */
+                margin: 0; /* Remove default margin */
+            }
+
+            .table-container {
+                height: calc(100% - 40mm); /* Adjust for margins */
+            }
+        } 
+        
+      
+        td{
+            font-size:25px !important;
+            color:black;
+        }
+        input{
+        font-size: 21px !important;
+        color: black;
+        }
+
+    td{
+        padding: 10px; /* Add padding for better appearance */
+    }
+
+    .table-container {
+        display: flex; /* Enable flexbox */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+    </style>
+
+<div class="text-center">
+    <div>
+        <img src="~/images/fgssrlogo.webp" alt="" style="width:300px; height:auto; margin-top:20px;" asp-append-version="true" />
+    </div>
+    <h4 style="margin-top:40px; color:black"> بطاقه ترشيح الطالب</h4>
+    <h3 style="margin-top:50px; color:black" id="studentname"></h3>
+    <button class="btn btn-info btn-print mt-3" onclick="window.print();">طباعه بطاقه الترشيح</button>
+</div>
+<div class="direction">
+    <div class="container table-container">
+        <div class="col-md-9">
+            <div class="udb">
+                <div class="udb-sec udb-prof">
+                    <div class="sdb-pro-table" id="innertable">
+
+                        
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

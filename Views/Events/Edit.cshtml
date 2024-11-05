@@ -1,0 +1,102 @@
+﻿@model EventsViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_DashboardLayout";
+
+}
+<div class="sb2-2-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box-inn-sp admin-form">
+                <div class="inn-title">
+                    <h4>تعديل مؤتمر</h4>
+                </div>
+                <div class="tab-inn">
+                    <form class="form" method="post" asp-action="Edit" enctype="multipart/form-data">
+                        <input hidden asp-for="EveId" />
+                        <input hidden asp-for="EventImageName" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <div class="input-field">
+                                    <span class="textsizespan">عنوان المؤتمر</span>
+                                    <input asp-for="EventTitle" type="text">
+                                    <span asp-validation-for="EventTitle" class="validationcolor"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span>المكان</span>
+                                <input asp-for="EventLocation" type="text">
+                                <span asp-validation-for="EventLocation" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">الوقت</span>
+                                <input asp-for="Time" type="text">
+                                <span asp-validation-for="Time" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">اليوم</span>
+                                <input asp-for="DateDay" type="text">
+                                <span asp-validation-for="DateDay" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">الشهر</span>
+                                <input asp-for="DateMonth" type="text">
+                                <span asp-validation-for="DateMonth" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <span class="textsizespan">الوصف</span>
+                                <textarea asp-for="EventDescription" rows="6"></textarea>
+                                <span asp-validation-for="EventDescription" class="validationcolor"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="file-field input-field col s12 m4 l2">
+                                <div class="btn admin-upload-btn">
+                                    <span class="textsizespan">رفع صوره</span>
+                                    <input type="file" asp-for="EditEventImage" data-rule-extension="jpg,png,jpeg" data-msg-extension="Only JPG , PNG , JPEG are allowed" data-rule-filesize="1048576" data-msg-filesize="Max file size is 1 MB" />
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text" placeholder="">
+                                </div>
+                                <span asp-validation-for="EditEventImage" class="validationcolor"></span>
+                            </div>
+                            <div class="s12 m4 l2">
+                                <img src="~/uploads/events/@Model.EventImageName" alt="No Image" width="200" height="200" asp-append-version="true" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="waves-effect waves-light btn-large waves-input-wrapper"><input type="submit" class="waves-button-input EditSubmitbutton" value="حفظ التعديلات"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $.validator.addMethod('filesize', function (value, element, params) {
+
+            return this.optional(element) || element.files[0].size <= params;
+        });
+    </script>
+
+}

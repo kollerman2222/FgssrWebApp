@@ -1,0 +1,28 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+
+<style>
+    .move{
+        padding-right:90px;
+        margin-bottom:20px;
+        margin-top:20px;
+    }
+
+</style>
+
+
+<section>
+    <div class="container com-sp pad-bot-70 d-flex justify-content-center move">
+        <div class="row">
+            <div class="con-title">
+                <h1 class="text-danger pb-5">@ViewData["Title"]</h1>
+                <h3 class="text-danger pb-5">You do not have access to this resource.</h3>
+                <a asp-action="Homepage" asp-controller="Home" class="btn btn-primary">Return to Homepage</a>
+            </div>
+        </div>
+    </div>
+ </section>

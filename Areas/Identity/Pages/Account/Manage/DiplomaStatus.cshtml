@@ -1,0 +1,260 @@
+﻿@page "/account/diplomastatus"
+@model DiplomaStatusModel
+
+<style>
+    .direction {
+        direction: rtl;
+    }
+
+    .bigtext {
+        font-size: 25px !important;
+    }
+
+    button{
+        font-size:20px !important;
+    }
+
+    .myspan {
+        position: absolute;
+        top: -0.5px; /* Adjust as needed */
+        right: 73%; /* Center the icon horizontally */
+        transform: translateX(50%); /* Center the icon horizontally */
+        font-size: 20px;
+        color: yellow;
+        animation: shake 0.3s infinite;
+    }
+
+    @@keyframes shake {
+        0% {
+            transform: translateX(50%) rotate(0deg);
+        }
+
+        25% {
+            transform: translateX(45%) rotate(-10deg);
+        }
+
+        50% {
+            transform: translateX(50%) rotate(0deg);
+        }
+
+        75% {
+            transform: translateX(55%) rotate(10deg);
+        }
+
+        100% {
+            transform: translateX(50%) rotate(0deg);
+        }
+    }
+
+    .hidenotify {
+        display: none;
+    }
+</style>
+
+<section>
+    <div class="pro-cover">
+    </div>
+    <div class="pro-menu">
+        <div class="container">
+            <div class="col-md-9 col-md-offset-3 direction">
+                <ul>
+                    <li><a href="/account/profile">الحساب</a></li>
+                    <li><a href="/account/email">الايميل</a></li>
+                    <li><a href="/account/password">تغيير كلمة المرور</a></li>
+                    <li><a href="/account/phonenumber">الموبيل</a></li>
+                    <li><a href="/account/diplomastatus">حاله طلب التقديم</a></li>
+                    <li><a href="/account/notify">الإشعارات</a><i class="myspan hidenotify fa fa-bell"></i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="stu-db direction">
+        <div class="container pg-inn">
+            <div class="col-md-3">
+                <div class="pro-user">
+                    @if (Model.Input.ProfileImage == null)
+                    {
+                        <img src="~/uploads/users/defaultuserimage.webp" alt="No Image" asp-append-version="true" >
+                    }
+                    else
+                    {
+                        <img src="~/uploads/users/@Model.Input.ProfileImage" alt="No Image" width="245" height="245" asp-append-version="true" >
+                    }
+                </div>
+                <div class="pro-user-bio">
+                    <ul>
+                        <li>
+                            <h4>@Model.Input.FullNameArabic</h4>
+                        </li>
+                        @if (Model.Input.StudentNumber != null)
+                        {
+                            <li>رقم الطالب: @Model.Input.StudentNumber</li>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="udb">
+
+                    <div class="udb-sec udb-prof">
+
+                        <h4 class="bigtext"><img src="~/images/db1.webp" alt="" asp-append-version="true" /> حاله طلب التقديم</h4>
+                        <div class="sdb-tabl-com sdb-pro-table">
+                            
+                            @if(Model.Input.ApplicationStatus == null)
+                            {
+                                <h3>لا يوجد طلب للإلتحاق باي برنامج دراسي</h3>
+                            }
+                            else
+                            {
+                                <div id="printdiv">
+                                    <table class="responsive-table bordered">
+                                        <tbody>
+
+                                            <tr>
+                                                <td>رقم طلب التقديم </td>
+                                                <td>:</td>
+                                                <td><input class="inputtext" asp-for="Input.AdmissionNumber" readonly /></td>
+                                            </tr>
+
+                                            @if (Model.Input.ApplicationStatus == "Approved")
+                                            {
+                                                <tr>
+                                                    <td>رقم الطالب</td>
+                                                    <td>:</td>
+                                                    <td><input class="inputtext" asp-for="Input.StudentNumber" readonly /></td>
+                                                </tr>
+                                            }
+
+                                            <tr>
+                                                <td>الاسم بالكامل عربي</td>
+                                                <td>:</td>
+                                                <td><input class="inputtext" id="studentname" asp-for="Input.FullNameArabic" readonly /></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>الاسم بالكامل انجليزي</td>
+                                                <td>:</td>
+                                                <td><input class="inputtext" asp-for="Input.FullNameEnglish" readonly /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>الموبيل</td>
+                                                <td>:</td>
+                                            <td><input class="inputtext" asp-for="Input.PhoneNumber" readonly /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>الرقم القومي</td>
+                                                <td>:</td>
+                                                <td><input class="inputtext" asp-for="Input.NationalId" readonly /></td>
+                                            </tr>
+                                        <tr>
+                                            <td>تاريخ الميلاد</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" asp-for="Input.BirthDate" readonly /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>اسم البرنامج الدراسي</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" asp-for="Input.Diploma" readonly /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>حاله طلب التقديم</td>
+                                            <td>:</td>
+                                                @if (Model.Input.ApplicationStatus == "Pending")
+                                            {
+                                                <td><input class="inputtext"  asp-for="Input.ApplicationStatus" style="color:blue;" readonly /></td>
+                                            }
+                                                else if (Model.Input.ApplicationStatus == "Approved")
+                                            {
+                                                <td><input class="inputtext" asp-for="Input.ApplicationStatus" style="color:green;" readonly /></td>
+
+                                            }
+                                                else if (Model.Input.ApplicationStatus == "Declined")
+                                            {
+                                               <td><input class="inputtext" asp-for="Input.ApplicationStatus" style="color:red;" readonly /></td>
+                                            }
+
+                                        </tr>
+                                            @if (Model.Input.ApplicationStatus == "Declined")
+                                            {
+                                                <tr>
+                                                    <td>سبب رفض طلب التقديم</td>
+                                                    <td>:</td>
+                                                    <td><input class="inputtext" asp-for="Input.DeclineReason" style="color:red;" readonly /></td>
+                                                </tr>
+                                            }
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="padding-top:50px;">
+                                @if (Model.Input.ApplicationStatus == "Approved")
+                                {
+                                    <h2 class=bigtext>برجاء التوجه الي مقر الكليه لتقديم الاوراق الاتيه :</h2>
+                                    <p class="pt-5"> 1- أصل شهاده البكالوريوس أو الليسانس و شهاده المعادله للجامعات و المعاهد الخاصه</p>
+                                    <p>2- شهاده الميلاد كمبيوتر</p>
+                                    <p>3- عدد 2 صوره شخصيه</p>
+                                    <p>4- الموقف من التجنيد</p>
+                                    <p>5- سحب مظروف التقديم + المصروفات الإداريه</p>
+                                    <p>6- طباعه بطاقه الترشيح 
+                                            <button class="btn btn-info" onclick="openPrintPage()">أضغط هنا</button>
+
+                                    </p>
+
+                                }
+                                </div>
+                                @if (Model.Input.ApplicationStatus == "Pending")
+                                {
+                                    <form method="post">
+                                    <div class="sdb-bot-edit">
+                                    <button type="submit" class="waves-effect waves-light btn-large sdb-btn3 ml-5"><i class="fa fa-pencil"></i> إلغاء طلب التقديم</button>
+                                    </div>
+                                    </form>
+                                }
+                                @if (Model.Input.ApplicationStatus == "Declined")
+                                {
+                                    <form method="post">
+                                        <div class="sdb-bot-edit">
+                                            <button type="submit" class="waves-effect waves-light btn-large sdb-btn3 ml-5"><i class="fa fa-pencil"></i>تقديم طلب جديد</button>
+                                        </div>
+                                    </form>
+                                }
+
+                            }
+
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+
+
+    <script>
+        function openPrintPage(){
+            // Get the content from the div
+            var divContent = document.getElementById("printdiv").innerHTML;
+            var getStudentName = document.querySelector('#studentname');
+            var fullNameArabic = getStudentName.value;
+
+            // Open a new window and write content directly into it
+            var newWindow = window.open('/home/printpage', '_blank');
+
+            // Add content to the new window after it loads
+            newWindow.onload = function () {
+                var targetElement = newWindow.document.getElementById("innertable");
+                var targetElement2 = newWindow.document.getElementById("studentname");
+                targetElement.innerHTML = divContent;
+                targetElement2.innerHTML = fullNameArabic;
+                // newWindow.print();
+                // newWindow.close();
+
+            };
+        }
+    </script>
+
+}

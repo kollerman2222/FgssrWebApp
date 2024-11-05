@@ -1,0 +1,22 @@
+﻿@model string
+
+<style>
+    button.reset-button {
+        /* Reset all styles to default */
+        all: initial;
+    }
+
+    .direction {
+        direction: rtl;
+    }
+
+</style>
+
+
+@if (!String.IsNullOrEmpty(Model))
+{
+    var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
+    <div class="alert alert-@statusMessageClass alert-dismissible direction" role="alert">
+       @Model
+    </div>
+}

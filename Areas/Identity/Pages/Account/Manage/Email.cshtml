@@ -1,0 +1,175 @@
+﻿@page "/account/email"
+@model EmailModel
+@{
+    ViewData["Title"] = "Manage Email";
+}
+
+<style>
+    .direction {
+        direction: rtl;
+    }
+
+    .bigtext{
+
+        font-size:25px !important;
+    }
+
+    .myspan {
+        position: absolute;
+        top: -0.5px; /* Adjust as needed */
+        right: 73%; /* Center the icon horizontally */
+        transform: translateX(50%); /* Center the icon horizontally */
+        font-size: 20px;
+        color: yellow;
+        animation: shake 0.3s infinite;
+    }
+
+    @@keyframes shake {
+        0% {
+            transform: translateX(50%) rotate(0deg);
+        }
+
+        25% {
+            transform: translateX(45%) rotate(-10deg);
+        }
+
+        50% {
+            transform: translateX(50%) rotate(0deg);
+        }
+
+        75% {
+            transform: translateX(55%) rotate(10deg);
+        }
+
+        100% {
+            transform: translateX(50%) rotate(0deg);
+        }
+    }
+
+    .hidenotify {
+        display: none;
+    }
+</style>
+
+@{
+    var todayDate = DateTime.Now;
+    var dayDifference = todayDate - Model.Input.EmailCodeCreated;
+}
+
+
+<section>
+    <div class="pro-cover">
+    </div>
+    <div class="pro-menu">
+        <div class="container">
+            <div class="col-md-9 col-md-offset-3 direction">
+                <ul>
+                    <li><a href="/account/profile">الحساب</a></li>
+                    <li><a href="/account/email">الايميل</a></li>
+                    <li><a href="/account/password">تغيير كلمة المرور</a></li>
+                    <li><a href="/account/phonenumber">الموبيل</a></li>
+                    <li><a href="/account/diplomastatus">حاله طلب التقديم</a></li>
+                    <li><a href="/account/notify">الإشعارات</a><i class="myspan hidenotify fa fa-bell"></i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="stu-db direction">
+        <div class="container pg-inn">
+            <div class="col-md-3">
+                <div class="pro-user">
+                    @if (Model.Input.ProfileImage == null)
+                    {
+                        <img src="~/uploads/users/defaultuserimage.webp" alt="No Image" asp-append-version="true" >
+                    }
+                    else
+                    {
+                        <img src="~/uploads/users/@Model.Input.ProfileImage" alt="No Image" width="245" height="245" asp-append-version="true" >
+                    }
+                </div>
+                <div class="pro-user-bio">
+                    <ul>
+                        <li>
+                            <h4>@Model.Input.FullNameArabic</h4>
+                        </li>
+                        @if (Model.Input.StudentNumber != null)
+                        {
+                            <li>رقم الطالب: @Model.Input.StudentNumber</li>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="udb">
+
+                    <div class="udb-sec udb-prof">
+                        <partial name="_StatusMessage" for="StatusMessage" />
+
+                        <h4 class="bigtext"><img src="~/images/db1.webp" alt="" asp-append-version="true" /> الايميل</h4>
+                        @if (Model.Input.IsEmailConfirmed) @* 3 7alat *@
+                        {
+                            <p>
+                                تم التحقق من بريدك الإلكتروني
+                            </p>
+
+                        }
+                        else if (!Model.Input.IsEmailConfirmed && Model.Input.EmailVerifyCode != null && dayDifference.TotalMinutes<3) @* 3 7alat *@
+                        {
+                            <form method="post" asp-page-handler="VerifyCode">
+                            <p style="margin-bottom:100px;">
+                                    تم إرسال رمز التحقق إلى بريدك الإلكتروني ,
+                                    الرجاء إدخال رمز التحقق الخاص ببريدك الإلكتروني أدناه ,
+                                <input class="inputtext" asp-for="Input.SendVerifyCode" /><button type="submit" class="btn btn-primary">تفعيل</button>
+                            </p>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-page-handler="GenerateCode">
+                                <p style="margin-bottom:100px;">
+                                    بريدك الإلكتروني غير مفعل ,
+                                    يجب عليك تفعيل بريدك الإلكتروني لتتمكن من استخدام بعض خدماتنا ,
+                                    اضغط هنا لتفعيل الايميل <button class="mb-5 ml-5 btn btn-primary" type="submit">إرسال رمز التحقق</button>
+                                </p>
+                            </form>
+                        }
+                        <div class="sdb-tabl-com sdb-pro-table">
+                            <form asp-page-handler="ChangeEmail" method="post">
+                                <table class="responsive-table bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>الايميل الحالي</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext" disabled  asp-for="Input.CurrentEmail" /></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>الايميل الجديد</td>
+                                            <td>:</td>
+                                            <td><input class="inputtext"  asp-for="Input.NewEmail" /></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                                <div class="sdb-bot-edit">
+ 
+                                    <button type="submit" class="waves-effect waves-light btn-large sdb-btn ml-5"><i class="fa fa-pencil"></i> حفظ التعديلات</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
